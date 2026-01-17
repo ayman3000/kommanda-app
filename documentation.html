@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation – Kommanda File Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="assets/images/app_icon.png">
+
+    <meta name="description"
+        content="Complete documentation for Kommanda: Getting started, navigation, file operations, AI assistant, search, and keyboard shortcuts.">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <img src="assets/images/app_icon.png" alt="Kommanda Logo">
+                <span class="logo-text">Kommanda</span>
+            </a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="features.html">Features</a>
+                <a href="documentation.html" class="active">Documentation</a>
+                <a href="kommanda.html">Download</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Docs Header -->
+    <section class="section" style="padding-top: 80px; padding-bottom: 40px;">
+        <div class="container">
+            <span class="badge badge-orange">User Guide</span>
+            <h1 class="mt-4">Kommanda Documentation</h1>
+            <p>Everything you need to master Kommanda's powerful features.</p>
+        </div>
+    </section>
+
+    <!-- Documentation Content -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container docs-content">
+
+            <!-- Getting Started -->
+            <div class="docs-section" id="get-started">
+                <h2><span>🚀</span> Get Started</h2>
+                <p>Welcome to <strong>Kommanda</strong>, the dual-pane file manager for macOS inspired by classic
+                    productivity tools, rebuilt for the modern era with AI and visual power.</p>
+
+                <h3 style="margin-top: 24px;">One Page, Two Panes</h3>
+                <p>The window is split into two independent <strong>Panes</strong> (Left & Right). The <strong>Active
+                        Pane</strong> (highlighted) is the source for your actions, while most operations use the
+                    <strong>Inactive Pane</strong> as the destination folder.</p>
+
+                <img src="assets/images/macos/dual-pane-overview.png" alt="Kommanda Dual-Pane Interface">
+
+                <h3>Quick Start Steps</h3>
+                <ol style="color: var(--text-secondary); padding-left: 24px;">
+                    <li style="padding: 8px 0;"><strong>Launch Kommanda</strong> — You'll see the dual-pane interface
+                    </li>
+                    <li style="padding: 8px 0;"><strong>Grant Access</strong> — Click the lock icon to give Kommanda
+                        access to your Home folder (required for macOS sandboxing)</li>
+                    <li style="padding: 8px 0;"><strong>Start Working</strong> — Use <kbd class="kbd">Space</kbd> for
+                        Quick Look, <kbd class="kbd">F5</kbd> to Copy, and the AI Button to start chatting</li>
+                </ol>
+
+                <div
+                    style="margin-top: 24px; padding: 20px; background: var(--bg-tertiary); border-radius: var(--radius-md); border-left: 4px solid var(--accent-orange);">
+                    <strong style="color: var(--accent-orange);">💡 Tip:</strong> If you like Kommanda, consider
+                    supporting development on <a href="https://ko-fi.com/W7W61DDVO5" target="_blank">Ko-fi</a>!
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="docs-section" id="navigation">
+                <h2><span>🧭</span> Navigation</h2>
+
+                <h3>Path Bar & Location</h3>
+                <ul style="color: var(--text-secondary); padding-left: 24px;">
+                    <li style="padding: 6px 0;">The path bar is collapsible. Click to edit, or use segments to jump up.
+                    </li>
+                    <li style="padding: 6px 0;">Use the <code
+                            style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px;">..</code> row
+                        to navigate to the parent folder.</li>
+                    <li style="padding: 6px 0;"><strong>Recent Folders</strong>: Access your last 10 visited folders via
+                        <kbd class="kbd">Shift + Cmd + R</kbd></li>
+                </ul>
+
+                <h3 style="margin-top: 24px;">View Modes</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px;">
+                    <div style="background: var(--bg-card); padding: 20px; border-radius: var(--radius-md);">
+                        <h4 style="color: var(--accent-orange);">📋 List View</h4>
+                        <p style="margin: 0; font-size: 0.9rem;">Detailed information with sortable headers. Great for
+                            seeing file sizes and dates.</p>
+                    </div>
+                    <div style="background: var(--bg-card); padding: 20px; border-radius: var(--radius-md);">
+                        <h4 style="color: var(--accent-green);">🖼️ Thumbnail Grid</h4>
+                        <p style="margin: 0; font-size: 0.9rem;">Visual layout ideal for images and media. Perfect for
+                            browsing photos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- File Operations -->
+            <div class="docs-section" id="file-operations">
+                <h2><span>📁</span> File Operations</h2>
+
+                <h3>Common Actions</h3>
+                <table class="shortcuts-table">
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>Shortcut</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Copy</strong></td>
+                            <td><kbd class="kbd">F5</kbd></td>
+                            <td>Duplicate selected files to the opposite pane</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Move</strong></td>
+                            <td><kbd class="kbd">F6</kbd></td>
+                            <td>Move selected files to the opposite pane</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rename</strong></td>
+                            <td><kbd class="kbd">F2</kbd></td>
+                            <td>Rename the selected item</td>
+                        </tr>
+                        <tr>
+                            <td><strong>New Folder</strong></td>
+                            <td><kbd class="kbd">F7</kbd></td>
+                            <td>Create a directory in the active pane</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Delete</strong></td>
+                            <td><kbd class="kbd">F8</kbd></td>
+                            <td>Move selected files to Trash</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 24px;">Background Tasks</h3>
+                <p>Large copy and move operations run in the background with a visual progress indicator, so you can
+                    continue working without waiting.</p>
+            </div>
+
+            <!-- Image & PDF -->
+            <div class="docs-section" id="image-pdf">
+                <h2><span>🖼️</span> Image & PDF Tools</h2>
+
+                <img src="assets/images/macos/pdf-annotation.png" alt="PDF Annotation in Kommanda">
+
+                <h3>Image Tools</h3>
+                <ul style="color: var(--text-secondary); padding-left: 24px;">
+                    <li style="padding: 6px 0;"><strong>Resize</strong> — Quick presets: 50%, 25%, HD</li>
+                    <li style="padding: 6px 0;"><strong>Convert</strong> — Switch between PNG, JPEG, WebP, and HEIC</li>
+                    <li style="padding: 6px 0;"><strong>Compress</strong> — Optimized quality presets for web</li>
+                </ul>
+
+                <h3 style="margin-top: 24px;">PDF Operations</h3>
+                <ul style="color: var(--text-secondary); padding-left: 24px;">
+                    <li style="padding: 6px 0;"><strong>Annotate</strong> — Add highlights, notes, and strikethroughs
+                        directly in the preview</li>
+                    <li style="padding: 6px 0;"><strong>Save</strong> — Changes are written back to the file instantly
+                        with <kbd class="kbd">Cmd + S</kbd></li>
+                    <li style="padding: 6px 0;"><strong>Merge</strong> — Combine multiple PDF documents into one</li>
+                </ul>
+            </div>
+
+            <!-- AI Assistant -->
+            <div class="docs-section" id="ai-assistant">
+                <h2><span>🤖</span> AI Assistant</h2>
+                <p>Kommanda's AI agent is context-aware—it knows your current folder, selection, and can execute file
+                    operations directly.</p>
+
+                <img src="assets/images/macos/ai-chat-panel.png" alt="AI Assistant Panel">
+
+                <h3>What You Can Ask</h3>
+                <div
+                    style="background: var(--bg-card); padding: 24px; border-radius: var(--radius-md); margin-top: 16px;">
+                    <div style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <span style="color: var(--accent-green);">💬</span> <em>"Organize these screenshots into folders
+                            by date"</em>
+                    </div>
+                    <div style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <span style="color: var(--accent-green);">💬</span> <em>"Summarize the selected PDF"</em>
+                    </div>
+                    <div style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <span style="color: var(--accent-green);">💬</span> <em>"Create a Flutter project structure
+                            here"</em>
+                    </div>
+                    <div style="padding: 12px 0;">
+                        <span style="color: var(--accent-green);">💬</span> <em>"Copy the images from the left pane to a
+                            new folder on the right"</em>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 24px;">AI Providers</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px;">
+                    <div
+                        style="background: var(--bg-card); padding: 20px; border-radius: var(--radius-md); text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 8px;">🦙</div>
+                        <h4>Ollama</h4>
+                        <p style="font-size: 0.85rem; margin: 0;">Run AI locally for maximum privacy</p>
+                    </div>
+                    <div
+                        style="background: var(--bg-card); padding: 20px; border-radius: var(--radius-md); text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 8px;">✨</div>
+                        <h4>Google Gemini</h4>
+                        <p style="font-size: 0.85rem; margin: 0;">Cloud AI with massive context</p>
+                    </div>
+                    <div
+                        style="background: var(--bg-card); padding: 20px; border-radius: var(--radius-md); text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 8px;">🤖</div>
+                        <h4>OpenAI</h4>
+                        <p style="font-size: 0.85rem; margin: 0;">GPT-4o and GPT-4o-mini</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search & Filter -->
+            <div class="docs-section" id="search-filter">
+                <h2><span>🔍</span> Search & Filter</h2>
+
+                <img src="assets/images/macos/search-filter.png" alt="Search and Filter Interface">
+
+                <h3>Search Modes</h3>
+                <table class="shortcuts-table">
+                    <thead>
+                        <tr>
+                            <th>Mode</th>
+                            <th>Example</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Literal</strong></td>
+                            <td><code>abc</code></td>
+                            <td>Exact text match</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Wildcard</strong></td>
+                            <td><code>*.dart</code></td>
+                            <td>Pattern matching with * and ?</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Regex</strong></td>
+                            <td><code>^test.*\.swift$</code></td>
+                            <td>Full regular expression support</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 24px;">Filter Chips</h3>
+                <p>Quickly narrow down results by category:</p>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px;">
+                    <span style="background: var(--bg-card); padding: 8px 16px; border-radius: 20px;">📁 Folders</span>
+                    <span style="background: var(--bg-card); padding: 8px 16px; border-radius: 20px;">🖼️ Images</span>
+                    <span style="background: var(--bg-card); padding: 8px 16px; border-radius: 20px;">📄 Docs</span>
+                    <span style="background: var(--bg-card); padding: 8px 16px; border-radius: 20px;">💻 Code</span>
+                    <span style="background: var(--bg-card); padding: 8px 16px; border-radius: 20px;">📦 Archives</span>
+                </div>
+            </div>
+
+            <!-- Keyboard Shortcuts -->
+            <div class="docs-section" id="shortcuts">
+                <h2><span>⌨️</span> Keyboard Shortcuts</h2>
+                <p>Master these shortcuts to supercharge your workflow.</p>
+
+                <table class="shortcuts-table">
+                    <thead>
+                        <tr>
+                            <th>Shortcut</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><kbd class="kbd">Tab</kbd></td>
+                            <td>Switch active pane focus</td>
+                        </tr>
+                        <tr>
+                            <td><kbd class="kbd">Space</kbd></td>
+                            <td>Quick Look preview</td>
+                        </tr>
+                        <tr>
+                            <td><kbd class="kbd">Ctrl + U</kbd></td>
+                            <td>Swap left and right panels</td>
+                        </tr>
+                        <tr>
+                            <td><kbd class="kbd">Cmd + T</kbd></td>
+                            <td>Open Terminal in current folder</td>
+                        </tr>
+                        <tr>
+                            <td><kbd class="kbd">Cmd + P</kbd></td>
+                            <td>Toggle Preview Panel</td>
+                        </tr>
+                        <tr>
+                            <td><kbd class="kbd">Cmd + S</kbd></td>
+                            <td>Save changes in Preview</td>
+                        </tr>
+                        <tr>
+                            <td><kbd class="kbd">Shift + Cmd + M</kbd></td>
+                            <td>Open User Guide</td>
+                        </tr>
+                        <tr>
+                            <td><kbd class="kbd">F5</kbd></td>
+                            <td>Copy to opposite pane</td>
+                        </tr>
+                        <tr>
+                            <td><kbd class="kbd">F6</kbd></td>
+                            <td>Move to opposite pane</td>
+                        </tr>
+                        <tr>
+                            <td><kbd class="kbd">F7</kbd></td>
+                            <td>New Folder</td>
+                        </tr>
+                        <tr>
+                            <td><kbd class="kbd">F8</kbd></td>
+                            <td>Delete</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- About Author -->
+            <div class="docs-section" id="about">
+                <h2><span>👨‍💻</span> About the Author</h2>
+                <p><strong>Kommanda</strong> was designed and developed by <strong>Ayman Moustafa</strong>, a software
+                    engineer passionate about building high-performance, beautiful, and AI-powered tools for the modern
+                    desktop.</p>
+
+                <h3 style="margin-top: 24px;">Mission</h3>
+                <p>To bridge the gap between classic file management efficiency and modern AI capabilities, providing a
+                    seamless experience for power users and creative professionals.</p>
+
+                <h3 style="margin-top: 24px;">Support the Project</h3>
+                <p>If you find Kommanda useful, consider supporting continued development:</p>
+                <div class="btn-group" style="margin-top: 16px;">
+                    <a href="https://ko-fi.com/W7W61DDVO5" class="btn btn-primary" target="_blank">☕ Support on
+                        Ko-fi</a>
+                    <a href="https://www.youtube.com/@BitsNBytesAI" class="btn btn-secondary" target="_blank">📺 YouTube
+                        Channel</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Kommanda</h4>
+                    <p style="color: var(--text-secondary);">The workflow-first file manager for macOS with AI in mind.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://ko-fi.com/W7W61DDVO5" target="_blank" title="Support on Ko-fi">☕</a>
+                        <a href="https://www.linkedin.com/in/ayman-hamed-moustafa/" target="_blank"
+                            title="LinkedIn">💼</a>
+                        <a href="https://www.youtube.com/@BitsNBytesAI" target="_blank" title="YouTube">📺</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Documentation</h4>
+                    <a href="#get-started">Get Started</a>
+                    <a href="#navigation">Navigation</a>
+                    <a href="#file-operations">File Operations</a>
+                    <a href="#ai-assistant">AI Assistant</a>
+                    <a href="#shortcuts">Shortcuts</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <a href="https://ko-fi.com/W7W61DDVO5" target="_blank">Support on Ko-fi</a>
+                    <a href="mailto:ayman3000@gmail.com">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Kommanda by Ayman Moustafa. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
