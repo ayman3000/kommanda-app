@@ -1,6 +1,6 @@
 /* =========================================
    Kommanda Website - Design System
-   Dark Blue-Grey Theme with Orange/Green Accents
+   Dark Blue-Grey Theme with Blue/Green Accents
    ========================================= */
 
 /* Google Fonts */
@@ -20,13 +20,13 @@
     --text-secondary: #8b949e;
     --text-muted: #6e7681;
 
-    /* Accent Colors */
-    --accent-orange: #f97316;
-    --accent-orange-light: #fb923c;
-    --accent-orange-dark: #ea580c;
-    --accent-green: #22c55e;
-    --accent-green-light: #4ade80;
-    --accent-green-dark: #16a34a;
+    /* Accent Colors - Premium Blue */
+    --accent-blue: #3b82f6;
+    --accent-blue-light: #60a5fa;
+    --accent-blue-dark: #2563eb;
+    --accent-green: #10b981;
+    --accent-green-light: #34d399;
+    --accent-green-dark: #059669;
 
     /* Blue-Grey Tones */
     --blue-grey-100: #f1f5f9;
@@ -40,8 +40,8 @@
     --blue-grey-900: #0f172a;
 
     /* Gradients */
-    --gradient-orange: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-    --gradient-green: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    --gradient-blue: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    --gradient-green: linear-gradient(135deg, #10b981 0%, #059669 100%);
     --gradient-hero: linear-gradient(135deg, #0d1117 0%, #1e293b 50%, #0f172a 100%);
     --gradient-card: linear-gradient(145deg, rgba(33, 38, 45, 0.9) 0%, rgba(22, 27, 34, 0.95) 100%);
 
@@ -49,8 +49,8 @@
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
     --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
     --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
-    --shadow-glow-orange: 0 0 30px rgba(249, 115, 22, 0.3);
-    --shadow-glow-green: 0 0 30px rgba(34, 197, 94, 0.3);
+    --shadow-glow-blue: 0 0 30px rgba(59, 130, 246, 0.3);
+    --shadow-glow-green: 0 0 30px rgba(16, 185, 129, 0.3);
 
     /* Border Radius */
     --radius-sm: 8px;
@@ -120,13 +120,13 @@ p {
 }
 
 a {
-    color: var(--accent-orange);
+    color: var(--accent-blue);
     text-decoration: none;
     transition: var(--transition-fast);
 }
 
 a:hover {
-    color: var(--accent-orange-light);
+    color: var(--accent-blue-light);
 }
 
 /* Layout */
@@ -175,7 +175,7 @@ header {
 .logo-text {
     font-size: 1.75rem;
     font-weight: 800;
-    background: var(--gradient-orange);
+    background: var(--gradient-blue);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -203,7 +203,7 @@ nav a:hover {
 }
 
 nav a.active {
-    background: var(--gradient-orange);
+    background: var(--gradient-blue);
     color: white;
 }
 
@@ -224,7 +224,7 @@ nav a.active {
     right: -20%;
     width: 60%;
     height: 150%;
-    background: radial-gradient(ellipse, rgba(249, 115, 22, 0.15) 0%, transparent 70%);
+    background: radial-gradient(ellipse, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
     pointer-events: none;
 }
 
@@ -253,7 +253,7 @@ nav a.active {
 }
 
 .hero-text h1 span {
-    background: var(--gradient-orange);
+    background: var(--gradient-blue);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -272,13 +272,13 @@ nav a.active {
 .hero-image img {
     width: 100%;
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg), var(--shadow-glow-orange);
+    box-shadow: var(--shadow-lg), var(--shadow-glow-blue);
     transition: var(--transition-slow);
 }
 
 .hero-image:hover img {
     transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 60px rgba(249, 115, 22, 0.4);
+    box-shadow: 0 20px 60px rgba(59, 130, 246, 0.4);
 }
 
 /* App Icon */
@@ -286,7 +286,7 @@ nav a.active {
     width: 140px;
     height: 140px;
     border-radius: 32px;
-    box-shadow: var(--shadow-lg), var(--shadow-glow-orange);
+    box-shadow: var(--shadow-lg), var(--shadow-glow-blue);
     transition: var(--transition-normal);
     margin-bottom: 24px;
 }
@@ -311,14 +311,14 @@ nav a.active {
 }
 
 .btn-primary {
-    background: var(--gradient-orange);
+    background: var(--gradient-blue);
     color: white;
-    box-shadow: var(--shadow-glow-orange);
+    box-shadow: var(--shadow-glow-blue);
 }
 
 .btn-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 40px rgba(249, 115, 22, 0.5);
+    box-shadow: 0 12px 40px rgba(59, 130, 246, 0.5);
     color: white;
 }
 
@@ -376,14 +376,14 @@ nav a.active {
     left: 0;
     width: 100%;
     height: 3px;
-    background: var(--gradient-orange);
+    background: var(--gradient-blue);
     opacity: 0;
     transition: var(--transition-normal);
 }
 
 .feature-card:hover {
     transform: translateY(-8px);
-    border-color: rgba(249, 115, 22, 0.3);
+    border-color: rgba(59, 130, 246, 0.3);
     box-shadow: var(--shadow-lg);
 }
 
@@ -395,7 +395,7 @@ nav a.active {
     width: 56px;
     height: 56px;
     border-radius: var(--radius-md);
-    background: var(--gradient-orange);
+    background: var(--gradient-blue);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -507,11 +507,11 @@ nav a.active {
 .shortcuts-table th {
     background: var(--bg-tertiary);
     font-weight: 600;
-    color: var(--accent-orange);
+    color: var(--accent-blue);
 }
 
 .shortcuts-table tr:hover {
-    background: rgba(249, 115, 22, 0.05);
+    background: rgba(59, 130, 246, 0.05);
 }
 
 .kbd {
@@ -552,7 +552,7 @@ footer {
 }
 
 .footer-section a:hover {
-    color: var(--accent-orange);
+    color: var(--accent-blue);
 }
 
 .footer-bottom {
@@ -580,7 +580,7 @@ footer {
 }
 
 .social-links a:hover {
-    background: var(--accent-orange);
+    background: var(--accent-blue);
     transform: translateY(-3px);
 }
 
@@ -595,9 +595,9 @@ footer {
     letter-spacing: 0.5px;
 }
 
-.badge-orange {
-    background: rgba(249, 115, 22, 0.2);
-    color: var(--accent-orange);
+.badge-blue {
+    background: rgba(59, 130, 246, 0.2);
+    color: var(--accent-blue);
 }
 
 .badge-green {
@@ -856,8 +856,8 @@ footer {
     text-align: center;
 }
 
-.text-orange {
-    color: var(--accent-orange);
+.text-blue {
+    color: var(--accent-blue);
 }
 
 .text-green {
