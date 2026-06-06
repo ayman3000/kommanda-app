@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy &amp; Local AI — Kommanda</title>
+<meta name="description" content="Run Kommanda's AI workflows locally with Ollama, or connect OpenAI or Gemini. File-changing actions are previewed and require confirmation. Built for people who care about control.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/kommanda.css">
+<script>document.documentElement.className += ' js';</script>
+<style>
+.subhero { position:relative; padding: 104px 0 60px; overflow:hidden; text-align:center; }
+.subhero::before { content:""; position:absolute; inset:0; z-index:-2; background: radial-gradient(46% 40% at 50% -6%, rgba(34,197,94,0.20), transparent 62%), radial-gradient(40% 40% at 82% 6%, rgba(56,189,248,0.14), transparent 70%), var(--bg); }
+.subhero h1 { font-size: clamp(38px,5.4vw,64px); margin: 22px auto 0; max-width: 16ch; }
+.subhero .lead { margin: 22px auto 0; }
+.green-grad { background: linear-gradient(120deg,#fff 40%, #7BE6A6 90%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+
+.steps { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; counter-reset:s; }
+.step { position:relative; }
+.step .n { font-family:var(--mono); font-size:13px; color:var(--cyan); border:1px solid var(--border); width:34px; height:34px; border-radius:9px; display:grid; place-items:center; margin-bottom:18px; }
+.step h3 { font-size:19px; margin-bottom:8px; }
+.step p { color:var(--muted); font-size:15px; margin:0; }
+@media (max-width:860px){ .steps{ grid-template-columns:1fr; } }
+
+.control-list { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:8px; }
+.ctrl { display:flex; gap:13px; align-items:flex-start; padding:20px; border:1px solid var(--border); border-radius:13px; background:var(--surface); }
+.ctrl svg { width:20px; height:20px; flex-shrink:0; margin-top:2px; stroke:var(--green); fill:none; stroke-width:2; }
+.ctrl b { display:block; margin-bottom:4px; }
+.ctrl p { margin:0; color:var(--muted); font-size:14.5px; }
+@media (max-width:760px){ .control-list{ grid-template-columns:1fr; } }
+
+.provider-grid { display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:18px; }
+.pcard { border:1px solid var(--border); border-radius:16px; background:var(--surface); padding:28px; position:relative; }
+.pcard.feat { border-color:rgba(34,197,94,.35); background:linear-gradient(180deg, rgba(11,18,16,.7), var(--surface)); }
+.pcard .pic { width:46px; height:46px; border-radius:12px; display:grid; place-items:center; font-family:var(--mono); font-weight:700; font-size:18px; margin-bottom:18px; }
+.pcard.feat .pic { background:rgba(34,197,94,.14); color:var(--green); border:1px solid rgba(34,197,94,.4); }
+.pcard .pic.api { background:var(--surface-2); color:var(--muted); border:1px solid var(--border); }
+.pcard h3 { font-size:20px; margin-bottom:6px; }
+.pcard .tagline { font-family:var(--mono); font-size:12px; color:var(--faint); margin-bottom:16px; }
+.pcard p { color:var(--muted); font-size:14.5px; margin:0; }
+.pcard .flag { position:absolute; top:20px; right:20px; font-family:var(--mono); font-size:10.5px; color:var(--green); border:1px solid rgba(34,197,94,.4); border-radius:999px; padding:4px 9px; }
+@media (max-width:860px){ .provider-grid{ grid-template-columns:1fr; } }
+
+/* safety card (shared look) */
+.scard { border:1px solid rgba(34,197,94,.3); border-radius:14px; overflow:hidden; background:linear-gradient(180deg, rgba(11,18,16,.9), var(--surface)); box-shadow:0 30px 80px -40px rgba(0,0,0,.9), 0 0 70px -30px rgba(34,197,94,.25); }
+.scard__h { display:flex; align-items:center; gap:11px; padding:16px 20px; border-bottom:1px solid var(--border); }
+.scard__h .ring { width:34px; height:34px; border-radius:9px; background:rgba(34,197,94,.12); border:1px solid rgba(34,197,94,.4); display:grid; place-items:center; }
+.scard__h .ring svg { width:18px; height:18px; stroke:var(--green); fill:none; stroke-width:2; }
+.scard__h .t b { display:block; font-size:15px; } .scard__h .t small { color:var(--faint); font-size:12.5px; font-family:var(--mono); }
+.scard__body { padding:16px 20px; font-family:var(--mono); font-size:13px; }
+.scard__body .row { display:flex; align-items:center; gap:10px; padding:9px 0; color:var(--muted); }
+.scard__body .row .tag { font-size:10.5px; padding:2px 8px; border-radius:5px; }
+.tag-del { background:rgba(255,95,87,.14); color:#ff8b85; } .tag-mv { background:rgba(56,189,248,.14); color:var(--cyan); } .tag-new { background:rgba(34,197,94,.14); color:#5ee089; }
+.scard__act { display:flex; gap:11px; padding:16px 20px; border-top:1px solid var(--border); }
+.kbtn { font-family:var(--mono); font-size:11.5px; padding:7px 13px; border-radius:7px; border:1px solid var(--border-strong); color:var(--muted); background:rgba(255,255,255,.03); }
+.kbtn.go { color:#04101f; background:var(--grad-cta); border-color:transparent; font-weight:600; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html"><span class="logo-mark">K</span> Kommanda</a>
+    <nav class="nav-links">
+      <a href="index.html#features">Features</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn--ghost btn--sm" href="index.html">Home</a>
+      <a class="btn btn--primary btn--sm" href="https://aymanhamed.gumroad.com/l/aexbb" target="_blank" rel="noopener">Start 14-Day Trial</a>
+      <button class="menu-btn" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="subhero" data-screen-label="Privacy-Hero">
+  <div class="wrap">
+    <span class="badge reveal" style="margin:0 auto"><span class="tag" style="background:linear-gradient(135deg,#22C55E,#38BDF8)">Local-first</span> Ollama on-device · OpenAI · Gemini · your choice</span>
+    <h1 class="reveal">Your files can stay <span class="green-grad">on your Mac.</span></h1>
+    <p class="lead reveal" style="text-align:center">Run AI workflows entirely on-device with Ollama, or connect a cloud model when you want more power. You decide where your data goes — and nothing changes your files without your confirmation.</p>
+  </div>
+</section>
+
+<!-- PROVIDER CHOICE -->
+<section class="section section--tight" data-screen-label="Providers">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow" style="color:var(--green)">Provider choice</p>
+      <h2>Pick the brain. Keep control.</h2>
+      <p class="lead">Switch providers anytime in settings. With Ollama selected, your file contents are processed locally and never leave your machine.</p>
+    </div>
+    <div class="provider-grid">
+      <div class="pcard feat reveal">
+        <span class="flag">100% local</span>
+        <div class="pic">◍</div>
+        <h3>Ollama</h3>
+        <p class="tagline">runs on your Mac · no account</p>
+        <p>Use open models locally for private workflows. Your documents are read and processed on-device — zero network requests for AI, no data sent to a third party.</p>
+      </div>
+      <div class="pcard reveal">
+        <div class="pic api">AI</div>
+        <h3>OpenAI</h3>
+        <p class="tagline">bring your own key</p>
+        <p>Connect your own OpenAI key when you want a frontier cloud model for heavier reasoning tasks.</p>
+      </div>
+      <div class="pcard reveal">
+        <div class="pic api">G</div>
+        <h3>Gemini</h3>
+        <p class="tagline">bring your own key</p>
+        <p>Prefer Google? Connect Gemini with your own key. The choice — and the trade-off — stays yours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCAL PROOF SPLIT -->
+<section class="section" data-screen-label="Local-Proof">
+  <div class="wrap split">
+    <div class="reveal">
+      <p class="eyebrow" style="color:var(--green)">On-device</p>
+      <h2>What “local” actually means.</h2>
+      <p class="lead">With Ollama selected, Kommanda runs the model on your own hardware. No account, no upload, no telemetry of your file contents — the work happens where your files already live.</p>
+      <div class="control-list" style="grid-template-columns:1fr; margin-top:28px">
+        <div class="ctrl"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><div><b>No file contents leave your Mac</b><p>When using Ollama, document text is processed locally — not sent to any server.</p></div></div>
+        <div class="ctrl"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><div><b>No account required to start</b><p>The 14-day trial runs without sign-up. Cloud providers are opt-in with your own key.</p></div></div>
+      </div>
+    </div>
+    <div class="reveal split__media">
+      <div class="glass" style="padding:30px">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px">
+          <span style="width:40px;height:40px;border-radius:10px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.35);display:grid;place-items:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+          <div><b style="display:block">Local processing</b><small class="faint" style="font-family:var(--mono);font-size:12px">provider: ollama · model: llama3</small></div>
+        </div>
+        <div style="font-family:var(--mono);font-size:13px;line-height:2.3;color:var(--muted)">
+          <div style="display:flex;justify-content:space-between"><span>AI network requests</span><span style="color:var(--green)">0 sent ✓</span></div>
+          <div style="display:flex;justify-content:space-between"><span>File contents uploaded</span><span style="color:var(--green)">none ✓</span></div>
+          <div style="display:flex;justify-content:space-between"><span>Account</span><span style="color:#cfd8e6">not required</span></div>
+          <div style="display:flex;justify-content:space-between"><span>Telemetry of file data</span><span style="color:var(--green)">off ✓</span></div>
+          <div style="display:flex;justify-content:space-between"><span>Provider</span><span style="color:#cfd8e6">user-selected</span></div>
+        </div>
+        <hr class="divider" style="margin:22px 0">
+        <p class="faint" style="font-size:13px;margin:0;line-height:1.6">Choosing OpenAI or Gemini sends requests to that provider with your own key — a deliberate trade-off you control in settings.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY -->
+<section class="section section--tight" data-screen-label="Privacy-Safety">
+  <div class="wrap split split--rev">
+    <div class="reveal split__media">
+      <div class="scard">
+        <div class="scard__h">
+          <span class="ring"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span>
+          <span class="t"><b>Confirm changes before they run</b><small>4 actions · nothing applied yet</small></span>
+        </div>
+        <div class="scard__body">
+          <div class="row"><span class="tag tag-new">NEW</span> mkdir <b style="color:#cfd8e6">/Invoices/2026-Q1</b></div>
+          <div class="row"><span class="tag tag-mv">MOVE</span> invoice_*.pdf → <b style="color:#cfd8e6">/Invoices/2026-Q1</b></div>
+          <div class="row"><span class="tag tag-mv">RENAME</span> IMG_4471 → <b style="color:#cfd8e6">receipt-march.png</b></div>
+          <div class="row"><span class="tag tag-del">DELETE</span> <b style="color:#cfd8e6">~/Downloads/tmp.zip</b></div>
+        </div>
+        <div class="scard__act">
+          <button class="kbtn go" style="font-family:var(--sans);font-weight:600">Apply changes</button>
+          <button class="kbtn" style="font-family:var(--sans)">Review each</button>
+          <button class="kbtn" style="font-family:var(--sans);margin-left:auto">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <p class="eyebrow">Safety</p>
+      <h2>AI actions are previewed before they touch your files.</h2>
+      <p class="lead">Kommanda's AI can act on the file system — but never silently. Every create, move, rename, or delete is drafted as a preview you approve, review step by step, or reject.</p>
+      <div class="control-list">
+        <div class="ctrl"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><div><b>Preview first</b><p>See the exact changes before anything runs.</p></div></div>
+        <div class="ctrl"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><div><b>Explicit approval</b><p>File-changing actions require confirmation.</p></div></div>
+        <div class="ctrl"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><div><b>Step-by-step</b><p>Approve the whole plan or one action at a time.</p></div></div>
+        <div class="ctrl"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><div><b>Always cancellable</b><p>Reject the plan and nothing changes.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTROL PRINCIPLES -->
+<section class="section section--tight" data-screen-label="Principles">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">The principle</p>
+      <h2>Built for people who care about control.</h2>
+      <p class="lead">A short, honest summary of how Kommanda treats your data and your files.</p>
+    </div>
+    <div class="control-list reveal" style="max-width:900px;margin:0 auto">
+      <div class="ctrl"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><div><b>You choose the provider</b><p>Local with Ollama, or cloud with OpenAI / Gemini using your own key.</p></div></div>
+      <div class="ctrl"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><div><b>Local means local</b><p>With Ollama, file contents are processed on-device and aren't uploaded.</p></div></div>
+      <div class="ctrl"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><div><b>No silent changes</b><p>File operations are previewed and require your confirmation.</p></div></div>
+      <div class="ctrl"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><div><b>Honest about beta</b><p>AI features are in beta and improving quickly — we won't over-promise.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" data-screen-label="Privacy-CTA">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;border-radius:24px;padding:80px 40px;position:relative;overflow:hidden;border:1px solid var(--border);background:radial-gradient(60% 100% at 50% 0%, rgba(34,197,94,.16), transparent 60%), linear-gradient(180deg,#0B1019,#080B12)">
+      <p class="eyebrow" style="color:var(--green)">Founder Edition · 14-day trial</p>
+      <h2 style="font-size:clamp(30px,4.6vw,50px)">Private by choice.<br>Fast by default.</h2>
+      <p class="lead" style="margin:18px auto 0">Try every feature for 14 days — no account needed to start.</p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:32px">
+        <a class="btn btn--primary btn--lg" href="https://aymanhamed.gumroad.com/l/aexbb" target="_blank" rel="noopener">Start 14-Day Trial</a>
+        <a class="btn btn--ghost btn--lg" href="index.html">Back to overview</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="index.html" style="margin-bottom:16px"><span class="logo-mark">K</span> Kommanda</a>
+        <p class="faint" style="font-size:14px;max-width:34ch;margin:0">The workflow-first file manager for macOS, built with AI in mind.</p>
+      </div>
+      <div><h4>Product</h4><a href="index.html#features">Features</a><a href="privacy.html">Privacy &amp; Local AI</a><a href="index.html#pricing">Pricing</a><a href="launch.html">Launch</a></div>
+      <div><h4>Get it</h4><a href="https://aymanhamed.gumroad.com/l/aexbb" target="_blank" rel="noopener">Buy on Gumroad</a><a href="index.html#faq">FAQ</a><a href="index.html#demo">Watch demo</a></div>
+      <div><h4>Connect</h4><a href="https://ko-fi.com/W7W61DDVO5" target="_blank" rel="noopener">Support on Ko-fi</a><a href="mailto:ayman3000@gmail.com">Contact</a></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Kommanda by Ayman Moustafa. All rights reserved.</span>
+      <div class="footer-social">
+        <a href="https://ko-fi.com/W7W61DDVO5" target="_blank" rel="noopener" aria-label="Ko-fi"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 5h14a4 4 0 0 1 0 8h-1.2A6 6 0 0 1 10 17H7a4 4 0 0 1-4-4zm14 6a2 2 0 0 0 0-4h-1v4z"/></svg></a>
+        <a href="https://www.linkedin.com/in/ayman-hamed-moustafa/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM0 8h5v16H0zM7.5 8h4.8v2.2h.07c.67-1.2 2.3-2.5 4.73-2.5 5.06 0 6 3.3 6 7.6V24h-5v-7.3c0-1.74-.03-4-2.44-4-2.44 0-2.81 1.9-2.81 3.87V24h-5z"/></svg></a>
+        <a href="https://www.youtube.com/@BitsNBytesAI" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.5a3 3 0 0 0-2.1-2.1C19 5 12 5 12 5s-7 0-8.9.4A3 3 0 0 0 1 7.5 31 31 0 0 0 .6 12 31 31 0 0 0 1 16.5a3 3 0 0 0 2.1 2.1C5 19 12 19 12 19s7 0 8.9-.4a3 3 0 0 0 2.1-2.1A31 31 0 0 0 23.4 12 31 31 0 0 0 23 7.5zM9.6 15.5v-7l6 3.5z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/kommanda.js"></script>
+<script>
+(function () {
+  function revealAll(){ document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); }); }
+  if (!('IntersectionObserver' in window)) { revealAll(); }
+  else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+    setTimeout(function(){ document.querySelectorAll('.reveal:not(.in)').forEach(function(el){ if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('in'); }); }, 2500);
+  }
+  document.addEventListener('click', function(e){
+    var btn = e.target.closest && e.target.closest('.menu-btn'); if (!btn) return;
+    var nav = document.querySelector('.nav-links'); if (!nav) return;
+    var open = nav.style.display === 'flex';
+    nav.style.cssText = open ? '' : 'display:flex;position:absolute;top:64px;left:0;right:0;flex-direction:column;background:#080B12;border-bottom:1px solid rgba(255,255,255,.08);padding:18px 28px;gap:18px;';
+  });
+})();
+</script>
+</body>
+</html>
