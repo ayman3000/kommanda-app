@@ -7,7 +7,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-MLNDBPCX4N');
 </script>
 <meta charset="utf-8">
@@ -15,715 +14,233 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png">
-<title>Kommanda — The workflow-first file manager for the AI era</title>
-<meta name="description" content="Kommanda is a fast, keyboard-first dual-pane file manager for macOS with AI-assisted workflows and local/private AI support. Stop browsing. Start commanding.">
+<title>Kommanda — The Mac file manager that does the work for you</title>
+<meta name="description" content="Kommanda is a native macOS dual-pane file manager with AI file actions, local Ollama support, Reclaim Space, Folder Graph, previews, terminal integration, and one-time pricing.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/kommanda.css">
 <script>document.documentElement.className += ' js';</script>
 <style>
-/* ============ HERO ============ */
-.hero { position: relative; padding: 116px 0 90px; overflow: hidden; }
-.hero::before {
-  content: ""; position: absolute; inset: 0; z-index: -2;
-  background:
-    radial-gradient(50% 42% at 50% -4%, rgba(59,130,246,0.30), transparent 62%),
-    radial-gradient(38% 38% at 84% 8%, rgba(139,92,246,0.18), transparent 70%),
-    var(--bg);
-}
-.hero::after {
-  content: ""; position: absolute; inset: 0; z-index: -1; opacity: .5;
-  background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-  background-size: 64px 64px;
-  -webkit-mask-image: radial-gradient(70% 55% at 50% 0%, #000 0%, transparent 75%);
-          mask-image: radial-gradient(70% 55% at 50% 0%, #000 0%, transparent 75%);
-}
-.hero-inner { text-align: center; max-width: 880px; margin: 0 auto; }
-.hero h1 { margin: 22px 0 0; }
-.hero .grad { background: linear-gradient(120deg,#fff 30%, #8AB4FF 70%, #38BDF8); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.hero .lead { margin: 22px auto 0; font-size: clamp(17px,1.55vw,21px); }
-.hero-cta { display: flex; gap: 14px; justify-content: center; margin-top: 34px; flex-wrap: wrap; }
-.trust-row { display: flex; gap: 10px 22px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
-.trust-row span { font-size: 13.5px; color: var(--faint); display: inline-flex; align-items: center; gap: 8px; }
-.trust-row svg { width: 15px; height: 15px; stroke: var(--green); fill: none; stroke-width: 2; }
-
-/* ============ APP WINDOW MOCK ============ */
-.app-shell { max-width: 1060px; margin: 64px auto 0; }
-.kapp {
-  border-radius: 14px; overflow: hidden;
-  background: #0A0E16;
-  border: 1px solid var(--border-strong);
-  box-shadow: 0 60px 160px -50px rgba(0,0,0,0.95), 0 0 0 1px rgba(255,255,255,0.03), 0 0 90px -30px rgba(56,189,248,.25);
-  font-family: var(--mono);
-  text-align: left;
-}
-.kapp__bar { height: 42px; display: flex; align-items: center; gap: 12px; padding: 0 14px; background: linear-gradient(180deg,#141A27,#0F1420); border-bottom: 1px solid var(--border); }
-.kdots { display: flex; gap: 8px; }
-.kdots i { width: 12px; height: 12px; border-radius: 50%; }
-.kdots i:nth-child(1){ background:#FF5F57; } .kdots i:nth-child(2){ background:#FEBC2E; } .kdots i:nth-child(3){ background:#28C840; }
-.kpath { display: flex; align-items: center; gap: 7px; margin: 0 auto; font-size: 12px; color: var(--muted); background: rgba(0,0,0,.3); border: 1px solid var(--border); padding: 4px 12px; border-radius: 7px; }
-.kpath b { color: var(--cyan); font-weight: 500; }
-.ktools { display: flex; gap: 8px; color: var(--faint); }
-.ktools svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.6; }
-
-.kbody { display: grid; grid-template-columns: 1fr 1fr; }
-.kpane { padding: 0 0 6px; }
-.kpane + .kpane { border-left: 1px solid var(--border); }
-.kpane__head { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; font-size: 11.5px; color: var(--faint); border-bottom: 1px solid var(--border); background: rgba(255,255,255,.012); }
-.kpane__head .active { color: var(--cyan); }
-.kcols { display: flex; justify-content: space-between; padding: 7px 14px; font-size: 10.5px; color: #4a5468; letter-spacing: .04em; text-transform: uppercase; }
-.krow { display: flex; align-items: center; gap: 10px; padding: 6px 14px; font-size: 12.5px; color: var(--muted); position: relative; }
-.krow .nm { flex: 1; display: flex; align-items: center; gap: 9px; color: #cfd8e6; }
-.krow .sz { color: var(--faint); font-size: 11.5px; width: 58px; text-align: right; }
-.krow .ico { width: 15px; height: 15px; flex-shrink: 0; }
-.krow .ico.folder { color: var(--cyan); } .krow .ico.file { color: #6b7689; } .krow .ico.img { color: var(--violet); }
-.krow .ico svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.5; }
-.krow.sel { background: linear-gradient(90deg, rgba(59,130,246,.16), rgba(59,130,246,.04)); color: #fff; }
-.krow.sel::before { content:""; position:absolute; left:0; top:0; bottom:0; width:2px; background: var(--cyan); }
-.krow.sel .nm { color: #fff; }
-.krow.mark .nm::after { content:"✓"; color: var(--green); font-size: 11px; margin-left: 4px; }
-
-.kfoot { display: flex; gap: 0; border-top: 1px solid var(--border); background: rgba(255,255,255,.012); }
-.kfoot .fk { flex: 1; text-align: center; padding: 9px 4px; font-size: 11px; color: var(--muted); border-right: 1px solid var(--border); }
-.kfoot .fk:last-child { border-right: 0; }
-.kfoot .fk b { color: var(--cyan); font-weight: 600; }
-
-/* AI command bar */
-.kai { border-top: 1px solid var(--border); padding: 12px 14px; background: linear-gradient(180deg, rgba(139,92,246,.05), rgba(59,130,246,.03)); display: flex; align-items: center; gap: 11px; }
-.kai .spark { width: 22px; height: 22px; flex-shrink:0; border-radius: 6px; background: var(--grad-ai); display: grid; place-items: center; }
-.kai .spark svg { width: 13px; height: 13px; stroke: #fff; fill: none; stroke-width: 2; }
-.kai .prompt { flex: 1; font-size: 12.5px; color: #dbe2ee; }
-.kai .prompt .cursor { display: inline-block; width: 7px; height: 15px; background: var(--cyan); margin-left: 1px; vertical-align: -2px; animation: blink 1s steps(2) infinite; }
-@keyframes blink { 50% { opacity: 0; } }
-.kai .run { font-size: 11px; color: var(--faint); }
-.kai .run kbd { font-size: 11px; padding: 2px 6px; }
-
-/* AI preview card slides up */
-.kpreview {
-  margin: 0 14px; border: 1px solid rgba(139,92,246,.35); border-radius: 10px;
-  background: linear-gradient(180deg, rgba(20,16,34,.9), rgba(12,12,22,.9));
-  overflow: hidden; max-height: 0; opacity: 0;
-  transition: max-height .55s cubic-bezier(.2,.7,.2,1), opacity .4s ease, margin-bottom .4s;
-}
-.kpreview.show { max-height: 220px; opacity: 1; margin-bottom: 12px; }
-.kpreview__h { display: flex; align-items: center; gap: 8px; padding: 10px 13px; border-bottom: 1px solid var(--border); font-size: 11.5px; color: var(--violet); }
-.kpreview__h svg { width: 14px; height: 14px; stroke: currentColor; fill:none; stroke-width: 1.8; }
-.kdiff { padding: 9px 13px; font-size: 11.5px; line-height: 1.9; }
-.kdiff .ln { display: flex; gap: 8px; }
-.kdiff .op { color: var(--green); width: 14px; }
-.kdiff .arr { color: var(--faint); }
-.kdiff b { color: #cfd8e6; font-weight: 500; }
-.kpreview__act { display: flex; gap: 9px; padding: 11px 13px; border-top: 1px solid var(--border); }
-.kbtn { font-family: var(--mono); font-size: 11.5px; padding: 7px 13px; border-radius: 7px; border: 1px solid var(--border-strong); color: var(--muted); background: rgba(255,255,255,.03); }
-.kbtn.go { color: #04101f; background: var(--grad-cta); border-color: transparent; font-weight: 600; }
-
-@media (max-width: 720px) {
-  .kcols, .krow .sz { display: none; }
-  .kbody { font-size: 11px; }
-  .kfoot .fk:nth-child(n+5) { display: none; }
-  .kpath { display: none; }
-}
-
-/* ============ generic section bits ============ */
-.problem-vs { display:grid; grid-template-columns: 1fr auto 1fr; gap: 0; align-items: stretch; margin-top: 48px; border:1px solid var(--border); border-radius: var(--radius-lg); overflow:hidden; background: var(--surface); }
-.problem-vs > div { padding: 40px; }
-.problem-vs .mid { display:grid; place-items:center; padding: 0 6px; background: var(--bg-2); border-left:1px solid var(--border); border-right:1px solid var(--border); }
-.problem-vs .mid span { font-family: var(--mono); font-size: 12px; color: var(--faint); writing-mode: vertical-rl; letter-spacing:.2em; }
-.problem-vs h3 { margin-bottom: 18px; font-size: 21px; }
-.problem-vs.pv-finder { color: var(--muted); }
-.vs-li { display:flex; gap:12px; align-items:flex-start; margin-bottom:14px; font-size:15.5px; color:var(--muted); }
-.vs-li svg { width:18px; height:18px; flex-shrink:0; margin-top:2px; stroke-width:2; fill:none; }
-.vs-li.bad svg { stroke: #6b7689; } .vs-li.good svg { stroke: var(--green); }
-.vs-li.good { color: #d3dbe8; }
-@media (max-width:760px){ .problem-vs{ grid-template-columns:1fr; } .problem-vs .mid{ writing-mode:initial; border:0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);} .problem-vs .mid span{ writing-mode:initial; } }
-
-.pillar-num { font-family: var(--mono); font-size: 12px; color: var(--cyan); margin-bottom: 18px; display:block; }
-.feat-list { list-style:none; padding:0; margin: 26px 0 0; }
-.feat-list li { display:flex; gap:13px; align-items:flex-start; margin-bottom:16px; font-size:16px; color:var(--muted); }
-.feat-list li svg { width:19px; height:19px; flex-shrink:0; margin-top:2px; stroke: var(--cyan); fill:none; stroke-width:2; }
-.feat-list li b { color: var(--text); font-weight: 560; }
-
-.media-frame { position: relative; }
-.media-frame .mac { transform: perspective(1600px) rotateY(-1.5deg); }
-
-.kv { display:flex; gap:10px; flex-wrap:wrap; margin-top: 26px; }
-
-/* safety card */
-.safety-card { max-width: 560px; }
-.scard {
-  border:1px solid rgba(34,197,94,.3); border-radius:14px; overflow:hidden;
-  background: linear-gradient(180deg, rgba(11,18,16,.9), var(--surface));
-  box-shadow: 0 30px 80px -40px rgba(0,0,0,.9), 0 0 70px -30px rgba(34,197,94,.25);
-}
-.scard__h { display:flex; align-items:center; gap:11px; padding:16px 20px; border-bottom:1px solid var(--border); }
-.scard__h .ring { width:34px; height:34px; border-radius:9px; background: rgba(34,197,94,.12); border:1px solid rgba(34,197,94,.4); display:grid; place-items:center; }
-.scard__h .ring svg { width:18px; height:18px; stroke: var(--green); fill:none; stroke-width:2; }
-.scard__h .t { font-family: var(--sans); }
-.scard__h .t b { display:block; font-size:15px; }
-.scard__h .t small { color: var(--faint); font-size:12.5px; font-family: var(--mono); }
-.scard__body { padding: 16px 20px; font-family: var(--mono); font-size:13px; }
-.scard__body .row { display:flex; align-items:center; gap:10px; padding:9px 0; color:var(--muted); }
-.scard__body .row .tag { font-size:10.5px; padding:2px 8px; border-radius:5px; }
-.tag-del { background: rgba(255,95,87,.14); color:#ff8b85; }
-.tag-mv { background: rgba(56,189,248,.14); color: var(--cyan); }
-.tag-new { background: rgba(34,197,94,.14); color: #5ee089; }
-.scard__act { display:flex; gap:11px; padding:16px 20px; border-top:1px solid var(--border); }
-
-/* providers */
-.providers { display:flex; gap:14px; flex-wrap:wrap; margin-top: 8px; }
-.prov { display:flex; align-items:center; gap:12px; padding:16px 18px; border:1px solid var(--border); border-radius:13px; background:var(--surface); flex:1; min-width:180px; transition:border-color .2s; }
-.prov:hover { border-color: var(--border-strong); }
-.prov .pic { width:38px; height:38px; border-radius:9px; display:grid; place-items:center; flex-shrink:0; font-family:var(--mono); font-weight:700; }
-.prov.local .pic { background: rgba(34,197,94,.14); color: var(--green); border:1px solid rgba(34,197,94,.35); }
-.prov.api .pic { background: var(--surface-2); color: var(--muted); border:1px solid var(--border); }
-.prov b { font-size:15px; } .prov small { display:block; color:var(--faint); font-size:12.5px; }
-.prov .badge-local { margin-left:auto; font-family:var(--mono); font-size:10px; color:var(--green); border:1px solid rgba(34,197,94,.35); border-radius:999px; padding:3px 8px; }
-
-/* demo strip — command cards */
-.cmd-card { display:flex; flex-direction:column; }
-.cmd-card .top { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
-.cmd-card h3 { font-size:18px; margin:18px 0 8px; }
-.cmd-card p { color:var(--muted); font-size:14.5px; margin:0; }
-.cmd-line { font-family:var(--mono); font-size:13px; background:#080C14; border:1px solid var(--border); border-radius:10px; padding:12px 14px; color:#cfd8e6; display:flex; align-items:center; gap:9px; }
-.cmd-line .k { color:var(--cyan); flex-shrink:0; }
-.cmd-line .muted-q { color:var(--faint); }
-.cmd-flow { display:flex; align-items:center; gap:10px; margin:12px 0; padding-left:4px; color:var(--faint); font-family:var(--mono); font-size:12px; }
-.cmd-flow svg { width:16px; height:16px; stroke:var(--faint); fill:none; stroke-width:1.6; }
-.cmd-res { font-family:var(--mono); font-size:12.5px; display:flex; flex-wrap:wrap; gap:8px; }
-.cmd-res .chip { background:rgba(34,197,94,.1); border:1px solid rgba(34,197,94,.3); color:#5ee089; border-radius:7px; padding:5px 10px; display:inline-flex; align-items:center; gap:6px; }
-.cmd-res .chip.v { background:rgba(139,92,246,.1); border-color:rgba(139,92,246,.3); color:#b89bff; }
-.cmd-res .chip.b { background:rgba(56,189,248,.1); border-color:rgba(56,189,248,.3); color:var(--cyan); }
-
-/* gallery */
-.gallery { display:grid; grid-template-columns: 2fr 1fr; grid-template-rows: auto auto; gap:22px; }
-.gallery .g-item { overflow:hidden; }
-.gallery .g-item.big { grid-row: span 2; }
-.gallery .mac img { width:100%; height:100%; object-fit: cover; object-position: top center; display:block; }
-.gallery .g-item.big .mac img { max-height: 540px; }
-.gallery .g-item.small .mac img { height: 246px; }
-.g-label { font-family:var(--mono); font-size:11.5px; color:var(--faint); margin-top:12px; display:flex; align-items:center; gap:8px; }
-@media (max-width:860px){ .gallery{ grid-template-columns:1fr; } .gallery .g-item.big{ grid-row:auto; } }
-
-/* terminal tile */
-.term { font-family:var(--mono); font-size:12.5px; padding:18px; background:#080C14; height:calc(100% - 40px); line-height:2; }
-.term .tl { color:#cfd8e6; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.term .tl.out { color:var(--faint); }
-.term .tp { color:var(--cyan); }
-.term .tc { color:var(--violet); margin:0 4px; }
-.term .cur2 { display:inline-block; width:7px; height:14px; background:var(--cyan); vertical-align:-2px; animation:blink 1s steps(2) infinite; }
-
-/* pricing */
-.price-wrap { max-width: 620px; margin: 0 auto; }
-.price-card {
-  border:1px solid rgba(56,189,248,.3); border-radius: var(--radius-lg);
-  background: linear-gradient(180deg, var(--surface), #0B0F19);
-  box-shadow: 0 40px 120px -50px rgba(0,0,0,.9), 0 0 100px -40px rgba(56,189,248,.3);
-  overflow:hidden; position:relative;
-}
-.price-card::before{ content:""; position:absolute; inset:0; background: radial-gradient(70% 50% at 50% 0%, rgba(59,130,246,.14), transparent 60%); pointer-events:none; }
-.price-top { padding: 40px 44px 30px; text-align:center; position:relative; }
-.price-flag { display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--cyan); background: rgba(56,189,248,.1); border:1px solid rgba(56,189,248,.3); border-radius:999px; padding:6px 14px; margin-bottom:24px; }
-.price-amt { display:flex; align-items:flex-start; justify-content:center; gap:4px; margin: 8px 0 6px; }
-.price-amt .cur { font-size:28px; color:var(--muted); margin-top:10px; }
-.price-amt .num { font-size:72px; font-weight:680; letter-spacing:-.04em; line-height:1; }
-.price-amt .per { align-self:flex-end; color:var(--faint); font-size:15px; margin-bottom:12px; }
-.price-list { margin-top: 10px; color: var(--faint); font-size: 14px; }
-.price-list s { color: #7d8796; }
-.price-list b { color: var(--cyan); font-weight: 600; }
-.price-sub { color:var(--muted); font-size:15px; }
-.price-feats { padding: 8px 44px 0; display:grid; grid-template-columns:1fr 1fr; gap:14px 26px; position:relative; }
-.price-feats .pf { display:flex; gap:11px; align-items:flex-start; font-size:14.5px; color:var(--muted); }
-.price-feats .pf svg { width:18px; height:18px; flex-shrink:0; margin-top:2px; stroke:var(--green); fill:none; stroke-width:2; }
-.price-feats .pf b { color:var(--text); font-weight:540; }
-.price-foot { padding: 32px 44px 40px; text-align:center; position:relative; }
-.price-foot .btn { width:100%; justify-content:center; }
-.price-foot .note { margin-top:16px; font-size:13px; color:var(--faint); }
-@media (max-width:560px){ .price-feats{ grid-template-columns:1fr; } .price-top,.price-feats,.price-foot{ padding-left:26px; padding-right:26px; } }
-
-/* final cta */
-.final {
-  text-align:center; border-radius: var(--radius-lg);
-  padding: 90px 40px; position:relative; overflow:hidden;
-  border:1px solid var(--border);
-  background: radial-gradient(60% 100% at 50% 0%, rgba(59,130,246,.2), transparent 60%), linear-gradient(180deg,#0B1019,#080B12);
-}
-.final h2 { font-size: clamp(32px,5vw,56px); }
-.final .lead { margin: 20px auto 0; }
-.final-cta { margin-top: 34px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+.hero { position:relative; padding:116px 0 86px; overflow:hidden; }
+.hero::before { content:""; position:absolute; inset:0; z-index:-2; background:radial-gradient(52% 42% at 50% -5%, rgba(59,130,246,.31), transparent 62%), radial-gradient(38% 38% at 84% 8%, rgba(139,92,246,.18), transparent 70%), var(--bg); }
+.hero::after { content:""; position:absolute; inset:0; z-index:-1; opacity:.5; background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px); background-size:64px 64px; -webkit-mask-image:radial-gradient(70% 55% at 50% 0%,#000,transparent 75%); mask-image:radial-gradient(70% 55% at 50% 0%,#000,transparent 75%); }
+.hero-inner { text-align:center; max-width:930px; margin:0 auto; }
+.hero h1 { margin:22px 0 0; }
+.hero .lead { margin:22px auto 0; }
+.hero-cta { display:flex; gap:14px; justify-content:center; margin-top:34px; flex-wrap:wrap; }
+.trust-row { display:flex; gap:10px 22px; justify-content:center; flex-wrap:wrap; margin-top:26px; }
+.trust-row span { font-size:13.5px; color:var(--faint); display:inline-flex; align-items:center; gap:8px; }
+.trust-row svg { width:15px; height:15px; stroke:var(--green); fill:none; stroke-width:2; }
+.app-shell { max-width:1080px; margin:62px auto 0; }
+.app-shell .mac img { max-height:620px; object-fit:cover; object-position:top center; }
 </style>
-</head>
-<body>
-
-<!-- ===================== HEADER ===================== -->
+</head><body>
 <header class="site-header">
   <div class="wrap nav">
-    <a class="brand" href="index.html" data-screen-label="Header">
-      <span class="logo-mark">K</span> Kommanda
-    </a>
+    <a class="brand" href="index.html"><span class="logo-mark">K</span> Kommanda</a>
     <nav class="nav-links">
       <a href="#features">Features</a>
+      <a href="#ai-rename">AI Rename</a>
+      <a href="#reclaim">Reclaim Space</a>
       <a href="privacy.html">Privacy</a>
       <a href="#pricing">Pricing</a>
-      <a href="#faq">FAQ</a>
     </nav>
     <div class="nav-cta">
-      <a class="btn btn--ghost btn--sm" href="privacy.html">Local AI</a>
+      <a class="btn btn--ghost btn--sm" href="launch.html">Launch</a>
       <a class="btn btn--primary btn--sm" href="https://aymanhamed.gumroad.com/l/aexbb/FIRSTUSERS" target="_blank" rel="noopener">Start 14-Day Trial</a>
       <button class="menu-btn" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </div>
   </div>
 </header>
-
-<!-- ===================== HERO ===================== -->
 <section class="hero" data-screen-label="Hero">
   <div class="wrap hero-inner">
-    <span class="badge reveal"><span class="tag">macOS</span> Native app · AI workflows · Local AI with Ollama</span>
-    <h1 class="reveal">The workflow-first file<br>manager for the <span class="grad">AI era.</span></h1>
-    <p class="lead reveal">Stop browsing your files. Start commanding them with dual-pane speed, AI-assisted workflows, and local/private model support on macOS.</p>
+    <span class="badge reveal"><span class="tag">macOS</span> Dual-pane · AI file actions · Local Ollama</span>
+    <h1 class="reveal">The Mac file manager<br>that <span class="grad-blue">does the work</span> for you.</h1>
+    <p class="lead reveal">Kommanda combines dual-pane file management with a real AI agent that can safely act on files — rename, organize, summarize, clean, and preview before anything changes.</p>
     <div class="hero-cta reveal">
       <a class="btn btn--primary btn--lg" href="https://aymanhamed.gumroad.com/l/aexbb/FIRSTUSERS" target="_blank" rel="noopener">Start 14-Day Trial</a>
-      <a class="btn btn--ghost btn--lg" href="#demo">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        Watch Demo
-      </a>
+      <a class="btn btn--ghost btn--lg" href="launch.html">Watch the launch story</a>
     </div>
     <div class="trust-row reveal">
       <span><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> macOS 14.6+</span>
       <span><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Apple Silicon + Intel</span>
       <span><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> One-time purchase</span>
-      <span><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> No subscription</span>
+      <span><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Local AI with Ollama</span>
+    </div>
+    <div class="hero-proof reveal">
+      <div class="proof-chip"><b>AI renames files</b><small>Analyze screenshots and create descriptive names.</small></div>
+      <div class="proof-chip"><b>75+ GB found</b><small>Reclaim rebuildable developer junk.</small></div>
+      <div class="proof-chip"><b>Preview first</b><small>AI drafts actions; you confirm before apply.</small></div>
+      <div class="proof-chip"><b>Command center</b><small>Preview, terminal, PDF, code, ZIP, graph.</small></div>
     </div>
   </div>
-
-  <!-- App window mock -->
   <div class="wrap app-shell reveal">
-    <div class="kapp" id="kapp">
-      <div class="kapp__bar">
-        <div class="kdots"><i></i><i></i><i></i></div>
-        <div class="kpath">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2"><path d="M3 7h6l2 2h10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-          ~/ <b>Users/ayman/projects</b>
-        </div>
-        <div class="ktools">
-          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="18"/><rect x="14" y="3" width="7" height="18"/></svg>
-        </div>
-      </div>
-      <div class="kbody">
-        <!-- left pane -->
-        <div class="kpane">
-          <div class="kpane__head"><span class="active">● projects</span><span>14 items</span></div>
-          <div class="kcols"><span>Name</span><span>Size</span></div>
-          <div class="krow"><span class="nm"><span class="ico folder"><svg viewBox="0 0 24 24"><path d="M3 7h6l2 2h10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span>src</span><span class="sz">—</span></div>
-          <div class="krow"><span class="nm"><span class="ico folder"><svg viewBox="0 0 24 24"><path d="M3 7h6l2 2h10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span>assets</span><span class="sz">—</span></div>
-          <div class="krow sel"><span class="nm"><span class="ico folder"><svg viewBox="0 0 24 24"><path d="M3 7h6l2 2h10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span>screenshots</span><span class="sz">—</span></div>
-          <div class="krow"><span class="nm"><span class="ico file"><svg viewBox="0 0 24 24"><path d="M14 3v5h5M7 3h7l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg></span>package.json</span><span class="sz">1.2 KB</span></div>
-          <div class="krow"><span class="nm"><span class="ico file"><svg viewBox="0 0 24 24"><path d="M14 3v5h5M7 3h7l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg></span>README.md</span><span class="sz">4.8 KB</span></div>
-          <div class="krow"><span class="nm"><span class="ico file"><svg viewBox="0 0 24 24"><path d="M14 3v5h5M7 3h7l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg></span>vite.config.ts</span><span class="sz">612 B</span></div>
-        </div>
-        <!-- right pane -->
-        <div class="kpane">
-          <div class="kpane__head"><span>screenshots</span><span>9 items</span></div>
-          <div class="kcols"><span>Name</span><span>Date</span></div>
-          <div class="krow"><span class="nm"><span class="ico img"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg></span>Screenshot 3.png</span><span class="sz">Mar 12</span></div>
-          <div class="krow"><span class="nm"><span class="ico img"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg></span>CleanShot 09.png</span><span class="sz">Apr 02</span></div>
-          <div class="krow"><span class="nm"><span class="ico img"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg></span>IMG_4471.png</span><span class="sz">Apr 18</span></div>
-          <div class="krow"><span class="nm"><span class="ico img"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg></span>diagram-v2.png</span><span class="sz">May 06</span></div>
-          <div class="krow"><span class="nm"><span class="ico img"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg></span>hero-shot.png</span><span class="sz">May 21</span></div>
-          <div class="krow"><span class="nm"><span class="ico img"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg></span>final_export.png</span><span class="sz">Jun 01</span></div>
-        </div>
-      </div>
-      <div class="kfoot">
-        <div class="fk"><b>F3</b> View</div>
-        <div class="fk"><b>F4</b> Edit</div>
-        <div class="fk"><b>F5</b> Copy</div>
-        <div class="fk"><b>F6</b> Move</div>
-        <div class="fk"><b>F7</b> Folder</div>
-        <div class="fk"><b>⌘K</b> Command</div>
-      </div>
-      <!-- AI preview card -->
-      <div class="kpreview" id="kpreview">
-        <div class="kpreview__h">
-          <svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/></svg>
-          Preview — 9 changes · nothing applied yet
-        </div>
-        <div class="kdiff">
-          <div class="ln"><span class="op">+</span><span class="arr">mkdir</span> <b>screenshots/2026-03</b></div>
-          <div class="ln"><span class="op">→</span><b>Screenshot 3.png</b> <span class="arr">→</span> <b>2026-03/</b></div>
-          <div class="ln"><span class="op">→</span><b>CleanShot 09.png</b> <span class="arr">→</span> <b>2026-04/</b></div>
-          <div class="ln"><span class="op">→</span><b>+ 7 more files</b> <span class="arr">grouped by month</span></div>
-        </div>
-        <div class="kpreview__act">
-          <button class="kbtn go">Apply 9 changes</button>
-          <button class="kbtn">Cancel</button>
-        </div>
-      </div>
-      <!-- AI command bar -->
-      <div class="kai">
-        <span class="spark"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/></svg></span>
-        <span class="prompt" id="kprompt"></span>
-        <span class="run"><kbd>↩</kbd></span>
-      </div>
+    <div class="mac glow-wrap">
+      <div class="mac__bar"><div class="mac__dots"><i></i><i></i><i></i></div><span class="mac__title">kommanda — dual-pane workspace</span></div>
+      <img class="screen-img" src="assets/images/launch/main-dual-pane-sanitized.jpg" alt="Kommanda dual-pane file manager workspace on macOS">
     </div>
   </div>
 </section>
 
-<!-- ===================== PROBLEM ===================== -->
-<section class="section" id="problem" data-screen-label="Problem">
+<section class="section" id="problem">
   <div class="wrap">
     <div class="section-head reveal">
       <p class="eyebrow">The problem</p>
       <h2>Finder shows your files.<br>Kommanda helps you work with them.</h2>
-      <p class="lead">Passive file managers make you browse, drag, and switch apps for every small task. The work happens everywhere except where your files live.</p>
+      <p class="lead">When your day is full of screenshots, downloads, PDFs, code, archives, and project folders, browsing is not enough. You need a command center.</p>
     </div>
     <div class="problem-vs reveal">
       <div class="pv-finder">
         <h3>Browsing files</h3>
-        <div class="vs-li bad"><svg viewBox="0 0 24 24" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>Single pane — endless back-and-forth to move things</div>
-        <div class="vs-li bad"><svg viewBox="0 0 24 24" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>Open another app to read, edit, or summarize</div>
-        <div class="vs-li bad"><svg viewBox="0 0 24 24" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>Repetitive organizing done by hand, file by file</div>
-        <div class="vs-li bad"><svg viewBox="0 0 24 24" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>Mouse-driven — your hands leave the keyboard</div>
+        <div class="vs-li bad"><svg viewBox="0 0 24 24" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>Open multiple Finder windows just to move files</div>
+        <div class="vs-li bad"><svg viewBox="0 0 24 24" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>Rename and organize repetitive files by hand</div>
+        <div class="vs-li bad"><svg viewBox="0 0 24 24" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>Jump between preview apps, terminal, and cleanup tools</div>
       </div>
       <div class="mid"><span>VS</span></div>
       <div>
         <h3>Commanding files</h3>
-        <div class="vs-li good"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Dual-pane source → target, move in one keystroke</div>
-        <div class="vs-li good"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Read, annotate, and summarize files in place</div>
-        <div class="vs-li good"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Describe a workflow, let AI draft the actions</div>
-        <div class="vs-li good"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Keyboard-first — F-keys, ⌘K, fingers stay home</div>
+        <div class="vs-li good"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Dual-pane source → target with keyboard shortcuts</div>
+        <div class="vs-li good"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Ask AI to draft safe file actions you approve</div>
+        <div class="vs-li good"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Preview, code, PDF, terminal, graph, and cleanup in one app</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===================== PILLARS ===================== -->
-<section class="section section--tight" id="features" data-screen-label="Pillars">
+<section class="section section--tight" id="features">
   <div class="wrap">
     <div class="section-head reveal">
-      <p class="eyebrow">Three ways it works</p>
-      <h2>A command center, not a browser.</h2>
+      <p class="eyebrow">What makes it different</p>
+      <h2>A command center, not another browser.</h2>
     </div>
     <div class="grid grid-3">
-      <div class="card reveal">
-        <span class="pillar-num">01</span>
-        <div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="8" height="16" rx="1"/><rect x="13" y="4" width="8" height="16" rx="1"/></svg></div>
-        <h3>Navigate faster</h3>
-        <p>Dual-pane source and target, a smart path bar, bookmarks, and keyboard shortcuts for copy, move, and folder ops. No window clutter.</p>
-        <div class="kv"><span class="kbd">F5 Copy</span><span class="kbd">F6 Move</span><span class="kbd">⌘K</span></div>
-      </div>
-      <div class="card reveal">
-        <span class="pillar-num">02</span>
-        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/></svg></div>
-        <h3>Command workflows</h3>
-        <p>Describe what you want in plain language. Kommanda's agent can organize folders, summarize PDFs, and draft file operations for you.</p>
-        <div class="kv"><span class="pill"><span class="dot dot--violet"></span>AI agent · beta</span></div>
-      </div>
-      <div class="card reveal">
-        <span class="pillar-num">03</span>
-        <div class="ic"><svg viewBox="0 0 24 24"><path d="M14 3v5h5M7 3h7l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg></div>
-        <h3>Work in context</h3>
-        <p>Preview and edit without leaving the app — Markdown, PDFs with annotation, code with syntax highlighting, images, ZIPs, and the terminal.</p>
-        <div class="kv"><span class="pill">PDF</span><span class="pill">Code</span><span class="pill">Images</span><span class="pill">ZIP</span></div>
-      </div>
+      <div class="card reveal"><span class="pillar-num">01</span><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="8" height="16" rx="1"/><rect x="13" y="4" width="8" height="16" rx="1"/></svg></div><h3>Dual-pane speed</h3><p>Source and target stay visible. Copy with F5, move with F6, create folders with F7, and keep your hands on the keyboard.</p><div class="kv"><span class="kbd">F5 Copy</span><span class="kbd">F6 Move</span><span class="kbd">⌘K</span></div></div>
+      <div class="card reveal"><span class="pillar-num">02</span><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/></svg></div><h3>AI that safely acts</h3><p>Kommanda's AI is tool-equipped. It can draft file operations, explain files, summarize documents, and wait for your confirmation.</p><div class="kv"><span class="pill"><span class="dot dot--violet"></span>Review → Confirm → Apply</span></div></div>
+      <div class="card reveal"><span class="pillar-num">03</span><div class="ic"><svg viewBox="0 0 24 24"><path d="M14 3v5h5M7 3h7l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg></div><h3>Work in context</h3><p>Preview images and PDFs, inspect code, use archive tools, launch terminal, and visualize folder structure without leaving your file manager.</p><div class="kv"><span class="pill">PDF</span><span class="pill">Code</span><span class="pill">ZIP</span><span class="pill">Terminal</span></div></div>
     </div>
   </div>
 </section>
 
-<!-- ===================== SOLUTION SPLIT 1: dual pane ===================== -->
-<section class="section" data-screen-label="Solution-DualPane">
-  <div class="wrap split">
+<section class="section" id="ai-rename">
+  <div class="wrap story-grid">
     <div class="reveal">
-      <p class="eyebrow">Dual-pane navigation</p>
-      <h2>Two panes. One keystroke.</h2>
-      <p class="lead">The proven Norton Commander layout, rebuilt for macOS. Source on the left, target on the right — copy and move without dragging across windows.</p>
-      <ul class="feat-list">
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Smart path bar</b> — jump to any parent directory instantly.</span></li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>F5 / F6 shortcuts</b> — copy and move with keyboard efficiency.</span></li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Terminal integration</b> — open the current folder in Terminal in one click.</span></li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Bookmarks</b> — save frequent locations for instant access.</span></li>
-      </ul>
+      <p class="eyebrow">Real proof</p>
+      <h2>Kommanda renamed its own launch screenshots.</h2>
+      <p class="lead">The screenshots for this launch started as generic macOS filenames. Kommanda analyzed what each image showed, drafted clear descriptive names, asked for confirmation, and renamed them into useful marketing-ready assets.</p>
+      <div class="flow-row"><span class="flow-step">Select screenshots</span><span class="flow-arrow">→</span><span class="flow-step">Ask AI</span><span class="flow-arrow">→</span><span class="flow-step">Review plan</span><span class="flow-arrow">→</span><span class="flow-step">Apply safely</span></div>
     </div>
-    <div class="media-frame reveal split__media">
-      <div class="mac glow-wrap">
-        <div class="mac__bar"><div class="mac__dots"><i></i><i></i><i></i></div><span class="mac__title">kommanda — dual-pane</span></div>
-        <img loading="lazy" src="https://ayman3000.github.io/kommanda-app/assets/images/macos/search-results-math.png" alt="Kommanda dual-pane interface with search and preview">
-      </div>
+    <div class="story-stack reveal">
+      <div class="mac"><div class="mac__bar"><div class="mac__dots"><i></i><i></i><i></i></div><span class="mac__title">AI request</span></div><img class="screen-img" src="assets/images/launch/ai-rename-request-panel.jpg" alt="Kommanda AI prompt asking to rename screenshot files"></div>
+      <div class="mac"><div class="mac__bar"><div class="mac__dots"><i></i><i></i><i></i></div><span class="mac__title">Renamed results</span></div><img class="screen-img" src="assets/images/launch/ai-rename-results-panel.jpg" alt="Kommanda AI renamed screenshot files with descriptive names"></div>
+      <div class="screen-note">AI file actions are previewed and require confirmation before changing files.</div>
     </div>
   </div>
 </section>
 
-<!-- ===================== SOLUTION SPLIT 2: AI ===================== -->
-<section class="section section--tight" data-screen-label="Solution-AI">
+<section class="section section--tight" id="reclaim">
   <div class="wrap split split--rev">
-    <div class="media-frame reveal split__media">
-      <div class="mac glow-wrap">
-        <div class="mac__bar"><div class="mac__dots"><i></i><i></i><i></i></div><span class="mac__title">kommanda — AI command panel</span></div>
-        <img loading="lazy" src="https://ayman3000.github.io/kommanda-app/assets/images/macos/ai-assistant-chat.png" alt="Kommanda AI command panel acting on files">
-      </div>
+    <div class="reveal split__media">
+      <div class="mac glow-wrap"><div class="mac__bar"><div class="mac__dots"><i></i><i></i><i></i></div><span class="mac__title">kommanda — Reclaim Space</span></div><img class="screen-img" src="assets/images/launch/reclaim-space-bright.jpg" alt="Kommanda Reclaim Space scanning rebuildable developer junk"></div>
     </div>
-    <div class="reveal">
-      <p class="eyebrow">AI workflows</p>
-      <h2>An agent with hands on your files.</h2>
-      <p class="lead">Kommanda's AI isn't just a chat box — it can act on the file system, with every change drafted as a preview you approve first.</p>
-      <ul class="feat-list">
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Natural-language commands</b> — "organize photos by date" or "create a project structure here."</span></li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Tool-equipped</b> — create, move, rename, and process documents directly.</span></li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Summarize &amp; explain</b> — turn a long PDF or a code file into a quick brief.</span></li>
-      </ul>
-      <div class="kv"><span class="pill"><span class="dot dot--violet"></span>AI features are in beta and improving quickly</span></div>
+    <div class="reveal wow-card">
+      <p class="eyebrow">Reclaim Space</p>
+      <div class="wow-number">75<span>+GB</span></div>
+      <h2 style="margin-top:16px">Found on a real developer machine.</h2>
+      <p class="lead" style="margin-top:16px">Kommanda scans rebuildable junk you can usually recreate: Xcode DerivedData, node_modules, Python virtual environments, package caches, browser caches, and ML caches.</p>
+      <div class="wow-list"><div class="item">Xcode DerivedData</div><div class="item">node_modules</div><div class="item">Python virtualenvs</div><div class="item">Package caches</div><div class="item">Browser caches</div><div class="item">ML / model caches</div></div>
     </div>
   </div>
 </section>
 
-<!-- ===================== DEMO STRIP ===================== -->
-<section class="section section--tight" id="demo" data-screen-label="Demo">
+<section class="section" id="developers">
   <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow">See it work</p>
-      <h2>Real tasks, fewer steps.</h2>
-    </div>
-    <div class="grid grid-3">
-      <div class="card cmd-card reveal">
-        <div class="top"><span class="pill"><span class="dot dot--violet"></span>AI workflow</span><span class="kbd">⌘K</span></div>
-        <div class="cmd-line"><span class="k">›</span> organize these <span class="muted-q">screenshots by month</span></div>
-        <div class="cmd-flow"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg> preview &amp; confirm</div>
-        <div class="cmd-res"><span class="chip v">9 files grouped</span><span class="chip">3 folders created</span></div>
-        <h3>Organize a folder</h3>
-        <p>Describe the structure you want; approve the moves Kommanda drafts before anything runs.</p>
-      </div>
-      <div class="card cmd-card reveal">
-        <div class="top"><span class="pill">PDF</span><span class="kbd">⌘K</span></div>
-        <div class="cmd-line"><span class="k">›</span> summarize <span class="muted-q">report-q1.pdf</span></div>
-        <div class="cmd-flow"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg> read in the preview pane</div>
-        <div class="cmd-res"><span class="chip b">3-paragraph brief</span><span class="chip b">key dates pulled</span></div>
-        <h3>Summarize a PDF</h3>
-        <p>Read, highlight, and annotate — then get the gist without ever leaving the pane.</p>
-      </div>
-      <div class="card cmd-card reveal">
-        <div class="top"><span class="pill">Dual-pane</span><span class="kbd">F5 · F6</span></div>
-        <div class="cmd-line"><span class="k">›</span> move ~/src <span style="color:var(--faint)">→</span> ~/archive</div>
-        <div class="cmd-flow"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg> source pane → target pane</div>
-        <div class="cmd-res"><span class="chip">240 files moved</span><span class="chip">0 dialogs</span></div>
-        <h3>Move &amp; copy fast</h3>
-        <p>Source to target with a single keystroke — batch operations without dragging windows.</p>
-      </div>
+    <div class="section-head reveal"><p class="eyebrow">For developers and creators</p><h2>Built for people who live in project folders.</h2><p class="lead">Kommanda is especially useful when your file work touches code, content, screenshots, PDFs, downloads, and local AI tools every day.</p></div>
+    <div class="dev-grid reveal">
+      <div class="dev-card"><div class="mini-ic">⌘</div><b>Keyboard-first</b><p>F-key file operations and command palette style actions reduce repetitive mouse work.</p></div>
+      <div class="dev-card"><div class="mini-ic">AI</div><b>Local Ollama</b><p>Use private local AI for file summaries and organization without sending content to cloud models.</p></div>
+      <div class="dev-card"><div class="mini-ic">$</div><b>Terminal integration</b><p>Open the active folder in terminal and keep command-line work connected to file context.</p></div>
+      <div class="dev-card"><div class="mini-ic">PDF</div><b>Rich previews</b><p>Read PDFs, images, Markdown, code, and archives without constantly changing apps.</p></div>
+      <div class="dev-card"><div class="mini-ic">ZIP</div><b>Archive tools</b><p>Create and inspect compressed files directly from your file workflow.</p></div>
+      <div class="dev-card"><div class="mini-ic">75</div><b>Dev cleanup</b><p>Find rebuildable folders that quietly eat disk space across projects and tools.</p></div>
+      <div class="dev-card"><div class="mini-ic">{} </div><b>Code context</b><p>Open code files with syntax-aware viewing for quick inspection and handoff.</p></div>
+      <div class="dev-card"><div class="mini-ic">◎</div><b>Folder Graph</b><p>Visualize large project folders when a tree view stops being enough.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ===================== LOCAL AI / PRIVACY ===================== -->
-<section class="section" data-screen-label="Privacy">
+<section class="section section--tight" id="folder-graph">
   <div class="wrap split">
+    <div class="reveal card" style="background:radial-gradient(90% 80% at 12% 0%, rgba(56,189,248,.12), transparent 62%), linear-gradient(180deg,var(--surface),#0B1019);">
+      <p class="eyebrow">Folder Graph</p>
+      <h2>See complex folders as a map.</h2>
+      <p class="lead">When a project grows too deep for a simple list, Folder Graph gives you a visual overview of structure and relationships so you can understand what is inside before reorganizing it.</p>
+      <div class="flow-row"><span class="flow-step">Scan folder</span><span class="flow-arrow">→</span><span class="flow-step">Reveal structure</span><span class="flow-arrow">→</span><span class="flow-step">Navigate visually</span></div>
+      <ul class="feat-list"><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Visual navigation</b> — inspect folder depth and hotspots quickly.</span></li><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Project understanding</b> — useful for codebases, datasets, courses, and content libraries.</span></li></ul>
+    </div>
+    <div class="reveal split__media"><div class="mac glow-wrap"><div class="mac__bar"><div class="mac__dots"><i></i><i></i><i></i></div><span class="mac__title">kommanda — Folder Graph</span></div><img class="screen-img" src="assets/images/launch/folder-graph-overview-bright.jpg" alt="Kommanda Folder Graph visualizing a folder structure"></div></div>
+  </div>
+</section>
+
+<section class="section" id="privacy">
+  <div class="wrap split split--rev">
+    <div class="reveal split__media"><div class="mac"><div class="mac__bar"><div class="mac__dots"><i></i><i></i><i></i></div><span class="mac__title">AI settings</span></div><img class="screen-img" src="assets/images/launch/ai-settings.jpg" alt="Kommanda AI settings with Ollama, OpenAI, and Gemini providers"></div></div>
     <div class="reveal">
       <p class="eyebrow" style="color:var(--green)">Local &amp; private</p>
-      <h2>Your files can stay<br>on your Mac.</h2>
-      <p class="lead">Run AI workflows entirely on-device with Ollama, or connect a cloud provider when you want more power. You choose where your data goes.</p>
-      <div class="providers" style="margin-top:30px">
-        <div class="prov local"><span class="pic">◍</span><span><b>Ollama</b><small>Runs locally on your Mac</small></span><span class="badge-local">100% local</span></div>
-      </div>
-      <div class="providers">
-        <div class="prov api"><span class="pic">AI</span><span><b>OpenAI</b><small>Bring your own key</small></span></div>
-        <div class="prov api"><span class="pic">G</span><span><b>Gemini</b><small>Bring your own key</small></span></div>
-      </div>
-      <p class="muted" style="margin-top:24px;font-size:15px">Built for people who care about control. <a href="privacy.html" style="color:var(--cyan)">Read the privacy approach →</a></p>
-    </div>
-    <div class="reveal split__media">
-      <div class="glass" style="padding:30px">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px">
-          <span style="width:40px;height:40px;border-radius:10px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.35);display:grid;place-items:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-          <div><b style="display:block">Local processing</b><small class="faint" style="font-family:var(--mono);font-size:12px">model: llama3 · ollama</small></div>
-        </div>
-        <div style="font-family:var(--mono);font-size:13px;line-height:2.2;color:var(--muted)">
-          <div style="display:flex;justify-content:space-between"><span>Network requests</span><span style="color:var(--green)">0 sent ✓</span></div>
-          <div style="display:flex;justify-content:space-between"><span>File contents</span><span style="color:var(--green)">stay on device ✓</span></div>
-          <div style="display:flex;justify-content:space-between"><span>Provider</span><span style="color:#cfd8e6">user-selected</span></div>
-          <div style="display:flex;justify-content:space-between"><span>Account required</span><span style="color:#cfd8e6">none</span></div>
-        </div>
-        <hr class="divider" style="margin:22px 0">
-        <p class="faint" style="font-size:13px;margin:0;line-height:1.6">Switch providers anytime in settings. With Ollama selected, AI runs without sending your files anywhere.</p>
-      </div>
+      <h2>Your files can stay <span class="grad-green">on your Mac.</span></h2>
+      <p class="lead">Use Ollama for local AI, or connect OpenAI/Gemini when you want cloud power. The provider choice is yours, and file-changing AI actions require explicit confirmation.</p>
+      <div class="providers" style="margin-top:30px"><div class="prov local"><span class="pic">◍</span><span><b>Ollama</b><small>Runs locally on your Mac</small></span><span class="badge-local">100% local</span></div></div>
+      <div class="providers"><div class="prov api"><span class="pic">AI</span><span><b>OpenAI</b><small>Bring your own key</small></span></div><div class="prov api"><span class="pic">G</span><span><b>Gemini</b><small>Bring your own key</small></span></div></div>
+      <p class="muted" style="margin-top:24px;font-size:15px"><a href="privacy.html" class="muted-link">Read the privacy approach →</a></p>
     </div>
   </div>
 </section>
 
-<!-- ===================== SAFETY ===================== -->
-<section class="section section--tight" data-screen-label="Safety">
-  <div class="wrap split split--rev">
-    <div class="reveal split__media safety-card">
-      <div class="scard">
-        <div class="scard__h">
-          <span class="ring"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span>
-          <span class="t"><b>Confirm changes before they run</b><small>4 actions · nothing applied yet</small></span>
-        </div>
-        <div class="scard__body">
-          <div class="row"><span class="tag tag-new">NEW</span> mkdir <b style="color:#cfd8e6">/Invoices/2026-Q1</b></div>
-          <div class="row"><span class="tag tag-mv">MOVE</span> invoice_*.pdf → <b style="color:#cfd8e6">/Invoices/2026-Q1</b></div>
-          <div class="row"><span class="tag tag-mv">RENAME</span> IMG_4471 → <b style="color:#cfd8e6">receipt-march.png</b></div>
-          <div class="row"><span class="tag tag-del">DELETE</span> <b style="color:#cfd8e6">~/Downloads/tmp.zip</b></div>
-        </div>
-        <div class="scard__act">
-          <button class="kbtn go" style="font-family:var(--sans);font-weight:600">Apply changes</button>
-          <button class="kbtn" style="font-family:var(--sans)">Review each</button>
-          <button class="kbtn" style="font-family:var(--sans);margin-left:auto">Cancel</button>
-        </div>
-      </div>
-    </div>
+<section class="section section--tight" id="safety">
+  <div class="wrap split">
     <div class="reveal">
       <p class="eyebrow">Safety</p>
       <h2>AI actions are previewed before they touch your files.</h2>
-      <p class="lead">Nothing is automatic. Every file-changing operation Kommanda's AI proposes is shown as a clear preview that you confirm — or reject — first.</p>
-      <ul class="feat-list">
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Preview every change</b> — see exactly what will be created, moved, renamed, or deleted.</span></li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Explicit confirmation</b> — file-changing actions require your approval.</span></li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>You stay in control</b> — review each step or cancel the whole plan.</span></li>
-      </ul>
+      <p class="lead">Kommanda is designed for control. The AI drafts a plan. You review the exact create, move, rename, or delete actions. Then you apply, review each step, or cancel.</p>
+      <ul class="feat-list"><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Preview every change</b> before it runs.</span></li><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Explicit confirmation</b> for file-changing actions.</span></li><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>You stay in control</b> with cancel and review options.</span></li></ul>
     </div>
+    <div class="reveal split__media"><div class="mac"><div class="mac__bar"><div class="mac__dots"><i></i><i></i><i></i></div><span class="mac__title">confirmation dialog</span></div><img class="screen-img" src="assets/images/launch/ai-confirmation-modal-only.jpg" alt="Kommanda AI confirmation dialog before applying file actions"></div></div>
   </div>
 </section>
 
-<!-- ===================== GALLERY ===================== -->
-<section class="section" data-screen-label="Gallery">
+<section class="section" id="gallery">
   <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow">A closer look</p>
-      <h2>Built for real work.</h2>
-    </div>
+    <div class="section-head reveal"><p class="eyebrow">A closer look</p><h2>Real app surfaces, not vaporware.</h2></div>
     <div class="gallery">
-      <div class="g-item big reveal">
-        <div class="mac">
-          <div class="mac__bar"><div class="mac__dots"><i></i><i></i><i></i></div><span class="mac__title">kommanda — workspace</span></div>
-          <img loading="lazy" src="https://ayman3000.github.io/kommanda-app/assets/images/macos/ai-assistant-chat.png" alt="Kommanda AI assistant and image tools">
-        </div>
-        <div class="g-label"><span class="dot" style="width:6px;height:6px;border-radius:50%;background:var(--violet)"></span>AI assistant · image tools</div>
-      </div>
-      <div class="g-item small reveal">
-        <div class="mac">
-          <div class="mac__bar"><div class="mac__dots"><i></i><i></i><i></i></div><span class="mac__title">search</span></div>
-          <img loading="lazy" src="https://ayman3000.github.io/kommanda-app/assets/images/macos/search-results-math.png" alt="Kommanda search and PDF reader">
-        </div>
-        <div class="g-label">Search · regex · PDF reader</div>
-      </div>
-      <div class="g-item small reveal">
-        <div class="mac" style="height:246px">
-          <div class="mac__bar"><div class="mac__dots"><i></i><i></i><i></i></div><span class="mac__title">terminal</span></div>
-          <div class="term">
-            <div class="tl"><span class="tp">~/projects</span> <span class="tc">$</span> open . in terminal</div>
-            <div class="tl out"># launched from the active pane</div>
-            <div class="tl"><span class="tp">~/projects</span> <span class="tc">$</span> unzip assets.zip</div>
-            <div class="tl out">inflating&nbsp; 14 files <span style="color:var(--green)">✓</span></div>
-            <div class="tl"><span class="tp">~/projects</span> <span class="tc">$</span> <span class="cur2"></span></div>
-          </div>
-        </div>
-        <div class="g-label">Terminal &amp; ZIP, built in</div>
-      </div>
+      <div class="g-item big reveal"><div class="mac"><div class="mac__bar"><div class="mac__dots"><i></i><i></i><i></i></div><span class="mac__title">manual and workspace</span></div><img src="assets/images/launch/manual-viewer-sanitized.jpg" alt="Kommanda user manual viewer inside the app"></div><div class="g-label">Manual viewer · in-app documentation</div></div>
+      <div class="g-item small reveal"><div class="mac"><div class="mac__bar"><div class="mac__dots"><i></i><i></i><i></i></div><span class="mac__title">code preview</span></div><img src="assets/images/launch/code-editor-bright.jpg" alt="Kommanda code editor and file preview"></div><div class="g-label">Code · preview · project context</div></div>
+      <div class="g-item small reveal"><div class="mac" style="height:246px"><div class="mac__bar"><div class="mac__dots"><i></i><i></i><i></i></div><span class="mac__title">terminal</span></div><div class="term"><div class="tl"><span class="tp">~/project</span> <span class="tc">$</span> open terminal here</div><div class="tl out"># launched from the active pane</div><div class="tl"><span class="tp">~/project</span> <span class="tc">$</span> unzip assets.zip</div><div class="tl out">inflating 14 files <span style="color:var(--green)">✓</span></div><div class="tl"><span class="tp">~/project</span> <span class="tc">$</span> <span class="cur2"></span></div></div></div><div class="g-label">Terminal integration · archive workflow</div></div>
     </div>
   </div>
 </section>
 
-<!-- ===================== PRICING / FOUNDER ===================== -->
-<section class="section" id="pricing" data-screen-label="Pricing">
+<section class="section" id="pricing">
   <div class="wrap price-wrap">
-    <div class="section-head reveal" style="margin-bottom:40px">
-      <p class="eyebrow">Founder Edition</p>
-      <h2>One-time purchase.<br>No subscription.</h2>
-    </div>
-    <div class="price-card reveal">
-      <div class="price-top">
-        <span class="price-flag"><span class="dot" style="width:6px;height:6px;border-radius:50%;background:var(--cyan)"></span>Founder Edition</span>
-        <div class="price-amt"><span class="cur">$</span><span class="num">29</span><span class="per">/ one-time</span></div>
-        <p class="price-list"><s>$29 regular price</s> · <b>$19 with Gumroad code FIRSTUSERS</b></p>
-        <p class="price-sub">14-day fully featured trial — no account needed.</p>
-      </div>
-      <div class="price-feats">
-        <div class="pf"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>14-day free trial</b>, fully featured</span></div>
-        <div class="pf"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>One-time purchase</b>, no subscription</span></div>
-        <div class="pf"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Works on up to <b>3 Macs</b></span></div>
-        <div class="pf"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>macOS 14.6+</b>, Apple Silicon &amp; Intel</span></div>
-        <div class="pf"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Local AI with <b>Ollama</b> + OpenAI / Gemini</span></div>
-        <div class="pf"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Future updates included</span></div>
-      </div>
-      <div class="price-foot">
-        <a class="btn btn--primary btn--lg" href="https://aymanhamed.gumroad.com/l/aexbb/FIRSTUSERS" target="_blank" rel="noopener">Get Kommanda on Gumroad</a>
-        <p class="note">Secure checkout via Gumroad · 14-day trial means you can try before you buy.</p>
-      </div>
-    </div>
+    <div class="section-head reveal" style="margin-bottom:40px"><p class="eyebrow">Founder Edition</p><h2>One-time purchase.<br>No subscription.</h2></div>
+    <div class="price-card clean-price reveal"><div class="price-top"><span class="price-flag"><span class="dot" style="width:6px;height:6px;border-radius:50%;background:var(--cyan)"></span>Launch offer</span><div class="price-amt"><span class="cur">$</span><span class="num">19</span><span class="per">/ one-time</span></div><p class="launch-price-note">Launch price with code <b>FIRSTUSERS</b> · regular price $29</p><p class="price-sub">14-day fully featured trial — no account needed.</p></div><div class="price-feats"><div class="pf"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>14-day free trial</b>, fully featured</span></div><div class="pf"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>One-time purchase</b>, no subscription</span></div><div class="pf"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>macOS 14.6+</b>, Apple Silicon &amp; Intel</span></div><div class="pf"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Local AI with <b>Ollama</b> + OpenAI / Gemini</span></div><div class="pf"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Future updates included</span></div></div><div class="price-foot"><a class="btn btn--primary btn--lg" href="https://aymanhamed.gumroad.com/l/aexbb/FIRSTUSERS" target="_blank" rel="noopener">Get Kommanda on Gumroad</a><p class="note">Secure checkout via Gumroad · use code FIRSTUSERS for the launch price.</p></div></div>
   </div>
 </section>
 
-<!-- ===================== FAQ ===================== -->
-<section class="section section--tight" id="faq" data-screen-label="FAQ">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow">Questions</p>
-      <h2>Good to know.</h2>
-    </div>
-    <div class="faq reveal">
-      <details>
-        <summary>Is Kommanda replacing Finder?<span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-        <p class="faq-a">Kommanda runs alongside Finder. It's a faster, keyboard-first, dual-pane way to navigate and work with files for power users — use it whenever you'd otherwise be dragging windows around.</p>
-      </details>
-      <details>
-        <summary>Does the AI modify files automatically?<span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-        <p class="faq-a">No. File-changing actions are previewed and require your confirmation. The AI drafts a plan; you decide whether to apply it, review each step, or cancel.</p>
-      </details>
-      <details>
-        <summary>Can I use local / private AI?<span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-        <p class="faq-a">Yes. Use Ollama to run models locally on your Mac so your files stay on-device, or connect OpenAI or Google Gemini with your own key when you want a cloud model.</p>
-      </details>
-      <details>
-        <summary>Is it a subscription?<span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-        <p class="faq-a">No. Kommanda is a one-time purchase — the Founder Edition. It works on up to 3 Macs and includes future updates.</p>
-      </details>
-      <details>
-        <summary>What macOS version do I need?<span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-        <p class="faq-a">macOS 14.6 or later, on both Apple Silicon and Intel Macs. There's also a Linux build available from the download page.</p>
-      </details>
-    </div>
-  </div>
+<section class="section section--tight" id="faq">
+  <div class="wrap"><div class="section-head reveal"><p class="eyebrow">Questions</p><h2>Good to know.</h2></div><div class="faq reveal"><details><summary>Does the AI modify files automatically?<span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="faq-a">No. File-changing actions are previewed and require confirmation. Kommanda drafts the plan; you decide whether to apply it, review each step, or cancel.</p></details><details><summary>Can I use Kommanda without cloud AI?<span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="faq-a">Yes. You can run local models through Ollama so your file contents stay on your Mac, or use Kommanda as a fast dual-pane file manager without relying on AI workflows.</p></details><details><summary>What does Reclaim Space delete?<span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="faq-a">It focuses on rebuildable cache-like content such as DerivedData, node_modules, virtual environments, package caches, browser caches, and ML caches. Review before removing anything important.</p></details><details><summary>Is it a subscription?<span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="faq-a">No. Kommanda is a one-time purchase Founder Edition with a 14-day trial.</p></details></div></div>
 </section>
 
-<!-- ===================== FINAL CTA ===================== -->
-<section class="section" data-screen-label="Final-CTA">
-  <div class="wrap">
-    <div class="final reveal">
-      <p class="eyebrow">Founder Edition · 14-day trial</p>
-      <h2>Stop browsing.<br>Start commanding.</h2>
-      <p class="lead">The workflow-first file manager for the AI era — keyboard-first, dual-pane, and private by choice.</p>
-      <div class="final-cta">
-        <a class="btn btn--primary btn--lg" href="https://aymanhamed.gumroad.com/l/aexbb/FIRSTUSERS" target="_blank" rel="noopener">Start 14-Day Trial</a>
-        <a class="btn btn--ghost btn--lg" href="privacy.html">How privacy works</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== FOOTER ===================== -->
+<section class="section"><div class="wrap"><div class="final reveal"><p class="eyebrow">Founder Edition · 14-day trial</p><h2>Stop browsing.<br>Start commanding.</h2><p class="lead">The Mac file manager for people who live in files — dual-pane, keyboard-first, and powered by AI when you want it.</p><div class="final-cta"><a class="btn btn--primary btn--lg" href="https://aymanhamed.gumroad.com/l/aexbb/FIRSTUSERS" target="_blank" rel="noopener">Start 14-Day Trial</a><a class="btn btn--ghost btn--lg" href="launch.html">See launch page</a></div></div></div></section>
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">
       <div>
         <a class="brand" href="index.html" style="margin-bottom:16px"><span class="logo-mark">K</span> Kommanda</a>
-        <p class="faint" style="font-size:14px;max-width:34ch;margin:0">The workflow-first file manager for macOS, built with AI in mind.</p>
+        <p class="faint" style="font-size:14px;max-width:34ch;margin:0">The Mac file manager that does the work for you — dual-pane, keyboard-first, and AI-assisted by choice.</p>
       </div>
-      <div>
-        <h4>Product</h4>
-        <a href="#features">Features</a>
-        <a href="privacy.html">Privacy &amp; Local AI</a>
-        <a href="#pricing">Pricing</a>
-        <a href="launch.html">Launch</a>
-      </div>
-      <div>
-        <h4>Get it</h4>
-        <a href="https://aymanhamed.gumroad.com/l/aexbb/FIRSTUSERS" target="_blank" rel="noopener">Buy on Gumroad</a>
-        <a href="#faq">FAQ</a>
-        <a href="#demo">Watch demo</a>
-      </div>
-      <div>
-        <h4>Connect</h4>
-        <a href="https://ko-fi.com/W7W61DDVO5" target="_blank" rel="noopener">Support on Ko-fi</a>
-        <a href="mailto:ayman3000@gmail.com">Contact</a>
-      </div>
+      <div><h4>Product</h4><a href="index.html#features">Features</a><a href="index.html#ai-rename">AI Rename</a><a href="index.html#reclaim">Reclaim Space</a><a href="privacy.html">Privacy &amp; Local AI</a></div>
+      <div><h4>Get it</h4><a href="https://aymanhamed.gumroad.com/l/aexbb/FIRSTUSERS" target="_blank" rel="noopener">Buy on Gumroad</a><a href="launch.html">Launch page</a><a href="index.html#faq">FAQ</a></div>
+      <div><h4>Connect</h4><a href="https://ko-fi.com/W7W61DDVO5" target="_blank" rel="noopener">Support on Ko-fi</a><a href="mailto:ayman3000@gmail.com">Contact</a></div>
     </div>
     <div class="footer-bottom">
       <span>© 2026 Kommanda by Ayman Moustafa. All rights reserved.</span>
@@ -735,72 +252,22 @@
     </div>
   </div>
 </footer>
-
 <script src="assets/kommanda.js"></script>
 <script>
-// Inline fallback for reveals + menu (robust against external script load failures)
 (function () {
   function revealAll(){ document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); }); }
   if (!('IntersectionObserver' in window)) { revealAll(); }
   else {
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    var io = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
     document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
-    // safety: if anything is still hidden after 2.5s (e.g. observer hiccup), show it
-    setTimeout(function(){ document.querySelectorAll('.reveal:not(.in)').forEach(function(el){
-      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('in');
-    }); }, 2500);
+    setTimeout(function(){ document.querySelectorAll('.reveal:not(.in)').forEach(function(el){ if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('in'); }); }, 2500);
   }
-  // mobile menu
   document.addEventListener('click', function(e){
-    var btn = e.target.closest && e.target.closest('.menu-btn');
-    if (!btn) return;
+    var btn = e.target.closest && e.target.closest('.menu-btn'); if (!btn) return;
     var nav = document.querySelector('.nav-links'); if (!nav) return;
     var open = nav.style.display === 'flex';
     nav.style.cssText = open ? '' : 'display:flex;position:absolute;top:64px;left:0;right:0;flex-direction:column;background:#080B12;border-bottom:1px solid rgba(255,255,255,.08);padding:18px 28px;gap:18px;';
   });
-})();
-</script>
-<script>
-// Hero AI command typing loop
-(function () {
-  const promptEl = document.getElementById('kprompt');
-  const preview = document.getElementById('kpreview');
-  if (!promptEl) return;
-  const text = "Organize these screenshots into folders by month";
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce) {
-    promptEl.innerHTML = text + '<span class="cursor"></span>';
-    preview.classList.add('show');
-    return;
-  }
-  let started = false;
-  const io = new IntersectionObserver((es) => {
-    es.forEach((e) => { if (e.isIntersecting && !started) { started = true; run(); io.disconnect(); } });
-  }, { threshold: 0.4 });
-  io.observe(document.getElementById('kapp'));
-
-  function run() {
-    let i = 0;
-    promptEl.innerHTML = '<span class="cursor"></span>';
-    const cursor = '<span class="cursor"></span>';
-    const type = () => {
-      if (i <= text.length) {
-        promptEl.innerHTML = text.slice(0, i) + cursor;
-        i++;
-        setTimeout(type, 45 + Math.random() * 50);
-      } else {
-        setTimeout(() => preview.classList.add('show'), 500);
-        setTimeout(loop, 6500);
-      }
-    };
-    setTimeout(type, 400);
-  }
-  function loop() {
-    preview.classList.remove('show');
-    setTimeout(run, 900);
-  }
 })();
 </script>
 </body>

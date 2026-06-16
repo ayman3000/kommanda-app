@@ -355,3 +355,141 @@ kbd, .kbd {
   .card { padding: 24px; }
   .nav-cta .btn--ghost { display: none; }
 }
+
+
+/* ============================================================
+   Kommanda Launch Upgrade — commercial feature sections
+   ============================================================ */
+.muted-link { color: var(--cyan); border-bottom: 1px solid rgba(56,189,248,.35); }
+.grad-blue { background: linear-gradient(120deg,#fff 25%,#8AB4FF 70%,#38BDF8); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.grad-green { background: linear-gradient(120deg,#fff 30%,#7BE6A6 90%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.hero-proof { display:grid; grid-template-columns: repeat(4,1fr); gap:14px; margin:36px auto 0; max-width:980px; }
+.proof-chip { border:1px solid var(--border); background:rgba(255,255,255,.035); border-radius:14px; padding:16px; text-align:left; }
+.proof-chip b { display:block; font-size:14px; color:var(--text); margin-bottom:3px; }
+.proof-chip small { color:var(--faint); font-size:12.5px; line-height:1.35; }
+@media(max-width:860px){ .hero-proof{grid-template-columns:1fr 1fr;} }
+@media(max-width:560px){ .hero-proof{grid-template-columns:1fr;} }
+
+.screen-img { width:100%; display:block; object-fit:cover; object-position:top center; }
+.screen-img.soft { border-radius:14px; border:1px solid var(--border-strong); box-shadow:0 30px 100px -45px rgba(0,0,0,.9); }
+.screen-note { font-family:var(--mono); font-size:11.5px; color:var(--faint); margin-top:12px; display:flex; gap:8px; align-items:center; }
+.screen-note::before { content:""; width:7px; height:7px; border-radius:50%; background:var(--cyan); box-shadow:0 0 12px var(--cyan); flex-shrink:0; }
+
+.story-grid { display:grid; grid-template-columns:1.05fr .95fr; gap:34px; align-items:center; }
+.story-stack { display:grid; gap:16px; }
+.story-stack .mac img { max-height:340px; object-fit:cover; object-position:top center; }
+@media(max-width:940px){ .story-grid{grid-template-columns:1fr;} }
+
+.wow-card { position:relative; overflow:hidden; border:1px solid rgba(56,189,248,.24); border-radius:var(--radius-lg); background:radial-gradient(80% 80% at 50% 0%, rgba(56,189,248,.14), transparent 62%), linear-gradient(180deg,var(--surface),#0A0E16); padding:34px; }
+.wow-number { font-size:clamp(48px,8vw,96px); line-height:.92; letter-spacing:-.06em; font-weight:720; color:#fff; }
+.wow-number span { color:var(--cyan); }
+.wow-list { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:24px; }
+.wow-list .item { font-family:var(--mono); font-size:12.5px; color:var(--muted); border:1px solid var(--border); border-radius:10px; padding:10px 12px; background:rgba(255,255,255,.025); }
+@media(max-width:560px){ .wow-list{grid-template-columns:1fr;} }
+
+.dev-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+.dev-card { border:1px solid var(--border); border-radius:16px; background:linear-gradient(180deg,var(--surface),#0C111B); padding:22px; }
+.dev-card b { display:block; margin:12px 0 6px; font-size:15.5px; }
+.dev-card p { margin:0; color:var(--muted); font-size:14px; line-height:1.5; }
+.dev-card .mini-ic { width:34px; height:34px; display:grid; place-items:center; border-radius:9px; background:var(--surface-2); color:var(--cyan); border:1px solid var(--border); font-family:var(--mono); font-size:13px; }
+@media(max-width:1000px){ .dev-grid{grid-template-columns:repeat(2,1fr);} }
+@media(max-width:560px){ .dev-grid{grid-template-columns:1fr;} }
+
+.flow-row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:22px; }
+.flow-step { font-family:var(--mono); font-size:12px; color:var(--muted); border:1px solid var(--border); border-radius:999px; padding:7px 11px; background:rgba(255,255,255,.035); }
+.flow-arrow { color:var(--faint); font-family:var(--mono); }
+
+.launch-band { border:1px solid var(--border); border-radius:var(--radius-lg); padding:42px; background:radial-gradient(70% 80% at 20% 0%, rgba(139,92,246,.15), transparent 62%), linear-gradient(180deg,#0B1019,#080B12); }
+.launch-band .lead { margin-top:18px; }
+.video-box { min-height:330px; border-radius:18px; border:1px solid rgba(56,189,248,.25); background:linear-gradient(180deg,#0A0E16,#05070D); display:grid; place-items:center; text-align:center; padding:28px; box-shadow:0 40px 120px -60px rgba(56,189,248,.35); }
+.video-box .play { width:72px; height:72px; border-radius:50%; display:grid; place-items:center; background:var(--grad-cta); color:#04101f; margin:0 auto 18px; font-size:28px; }
+.video-box--embed { padding:0; overflow:hidden; background:#05070D; }
+.launch-video { width:100%; display:block; aspect-ratio:16/9; background:#05070D; object-fit:cover; }
+
+.clean-price .price-amt .num { color:#fff; }
+.clean-price .launch-price-note { color:var(--muted); margin:10px 0 0; font-size:15px; }
+.clean-price .launch-price-note b { color:var(--cyan); }
+
+.mini-quote { border:1px solid var(--border); border-radius:16px; padding:24px; background:rgba(255,255,255,.03); }
+.mini-quote p { margin:0; color:#d7dfeb; font-size:17px; line-height:1.55; }
+.mini-quote small { display:block; margin-top:14px; color:var(--faint); font-family:var(--mono); }
+
+
+/* Dark-empty area fix: make comparison panels visibly intentional text cards, not black placeholders */
+.problem-vs {
+  background: linear-gradient(180deg, rgba(15,20,32,.96), rgba(9,13,22,.96));
+  box-shadow: 0 30px 90px -55px rgba(0,0,0,.95), inset 0 1px 0 rgba(255,255,255,.04);
+}
+.problem-vs > div:not(.mid) {
+  background:
+    radial-gradient(80% 60% at 18% 0%, rgba(56,189,248,.055), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.026), rgba(255,255,255,.012));
+}
+.problem-vs .pv-finder {
+  background:
+    radial-gradient(80% 60% at 18% 0%, rgba(107,118,137,.11), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.024), rgba(255,255,255,.01));
+}
+.problem-vs h3 { color: var(--text); display:flex; align-items:center; gap:10px; }
+.problem-vs h3::before { content:""; width:10px; height:10px; border-radius:50%; background:var(--cyan); box-shadow:0 0 18px rgba(56,189,248,.75); }
+.problem-vs .pv-finder h3::before { background:#6b7689; box-shadow:0 0 12px rgba(107,118,137,.6); }
+.vs-li {
+  padding: 12px 13px;
+  border: 1px solid rgba(255,255,255,.075);
+  border-radius: 12px;
+  background: rgba(255,255,255,.026);
+}
+.vs-li + .vs-li { margin-top: 12px; }
+.vs-li svg { width:20px; height:20px; padding:3px; border-radius:7px; background:rgba(255,255,255,.035); }
+.vs-li.good { background: rgba(34,197,94,.055); border-color: rgba(34,197,94,.16); }
+.vs-li.bad { background: rgba(255,255,255,.018); }
+.problem-vs .mid { background: linear-gradient(180deg,#0B1019,#060911); }
+.problem-vs .mid span { color: var(--cyan); opacity:.8; }
+
+
+/* SVG/checkmark sizing fix: prevents default 300x150 black inline SVG placeholders */
+.feat-list { list-style:none; padding:0; margin:26px 0 0; }
+.feat-list li { display:flex; gap:13px; align-items:flex-start; margin-bottom:16px; font-size:16px; color:var(--muted); }
+.feat-list li b { color:var(--text); font-weight:560; }
+.feat-list li svg {
+  width:19px;
+  height:19px;
+  flex:0 0 19px;
+  margin-top:2px;
+  color:var(--cyan);
+  stroke:currentColor;
+  fill:none;
+  stroke-width:2;
+}
+.feat-list li svg path,
+.vs-li svg path,
+.price-feats .pf svg path,
+.ctrl svg path,
+.trust-row svg path,
+.ph-row svg path {
+  fill:none !important;
+  stroke:currentColor;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.vs-li svg { color: inherit; fill:none; }
+.price-feats .pf svg { color:var(--green); fill:none; }
+.trust-row svg, .ph-row svg { color:var(--green); fill:none; }
+
+
+/* Pricing/checklist SVG sizing fix */
+.price-feats .pf svg,
+.control-list .ctrl svg {
+  width:18px;
+  height:18px;
+  flex:0 0 18px;
+  margin-top:2px;
+  color:var(--green);
+  stroke:currentColor;
+  fill:none;
+  stroke-width:2;
+}
+.price-feats .pf { display:flex; gap:11px; align-items:flex-start; font-size:14.5px; color:var(--muted); }
+.price-feats .pf b { color:var(--text); font-weight:540; }
+.price-feats { padding:8px 44px 0; display:grid; grid-template-columns:1fr 1fr; gap:14px 26px; position:relative; }
+@media (max-width:560px){ .price-feats{ grid-template-columns:1fr; padding-left:26px; padding-right:26px; } }
