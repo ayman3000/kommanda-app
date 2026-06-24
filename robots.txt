@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /assets/images/og-kommanda.png
+
+Sitemap: https://kommanda.app/sitemap.xml
