@@ -94,6 +94,45 @@ h3 { font-size: clamp(20px, 2.2vw, 26px); letter-spacing: -0.02em; }
 .muted { color: var(--muted); }
 .faint { color: var(--faint); }
 
+
+/* ---------- Hero conversion helpers ---------- */
+.hero-benefits {
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:24px auto 0;
+}
+.hero-benefits span {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:9px 13px;
+  border-radius:999px;
+  border:1px solid rgba(56,189,248,.20);
+  background:rgba(56,189,248,.055);
+  color:#DDE8F7;
+  font-size:14px;
+  line-height:1.25;
+}
+.hero-benefits span::before {
+  content:"✓";
+  color:var(--green);
+  font-weight:700;
+}
+.screen-caption {
+  max-width:820px;
+  margin:16px auto 0;
+  text-align:center;
+  color:#CBD5E1;
+  font-size:14.5px;
+  line-height:1.5;
+}
+.hero .lead { color:#C6D0DE; }
+.nav-links a { color:#B8C3D1; }
+.trust-row span { color:#B8C3D1; }
+@media (max-width:560px){ .hero-benefits{justify-content:flex-start;} .hero-benefits span{width:100%; justify-content:flex-start;} }
+
 /* ---------- Buttons ---------- */
 .btn {
   display: inline-flex;
@@ -571,6 +610,28 @@ kbd, .kbd {
     filter: saturate(1.05) contrast(1.02);
   }
 }
+
+
+/* Product screenshots are the proof; keep them legible instead of melting into the dark theme. */
+.mac img,
+.screen-img,
+.g-item img {
+  background:#0B1019;
+}
+.screen-img,
+.mac > img,
+.g-item img {
+  filter: brightness(1.07) contrast(1.04) saturate(1.04);
+}
+.card p,
+.dev-card p,
+.compare-list,
+.faq .faq-a,
+.footer-grid a,
+.footer-grid p { color:#B8C3D1; }
+.card p,
+.dev-card p { font-size:15.75px; }
+@media (max-width:1080px){ .nav-links{ gap:20px; } .nav-links a{ font-size:14px; } }
 
 @media (prefers-reduced-motion: reduce) {
   .mac,
