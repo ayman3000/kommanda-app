@@ -69,18 +69,27 @@
   "name": "Kommanda",
   "applicationCategory": "FileManagerApplication",
   "operatingSystem": "macOS",
-  "softwareVersion": "2.14.0",
+  "softwareVersion": "2.26.0",
   "description": "A native macOS file manager built for project folders: dual- or single-pane operations, live previews, an embedded terminal, folder graphs, and a cleaner that knows rebuildable build junk from your source.",
   "url": "https://kommanda.app/",
   "downloadUrl": "https://github.com/ayman3000/kommanda-app/releases/latest/download/Kommanda.dmg",
   "image": "https://kommanda.app/assets/images/share-icon-kommanda-v274.png",
   "screenshot": "https://kommanda.app/assets/images/og-kommanda.png",
-  "offers": {
-    "@type": "Offer",
-    "name": "Kommanda Free",
-    "price": "0",
-    "priceCurrency": "USD"
-  }
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Kommanda Free",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    {
+      "@type": "Offer",
+      "name": "Kommanda Pro",
+      "price": "49",
+      "priceCurrency": "USD",
+      "url": "https://store.kommanda.app"
+    }
+  ]
 }
 </script>
 <script type="application/ld+json">
@@ -197,7 +206,7 @@
     </div>
     <div class="grid grid-3">
       <div class="card reveal"><span class="pillar-num">01</span><div class="ic"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><rect x="3" y="4" width="8" height="16" rx="1"/><rect x="13" y="4" width="8" height="16" rx="1"/></svg></div><h3>Dual-pane speed</h3><p>Source and target stay visible. Copy with F5, move with F6, create folders with F7, and keep your hands on the keyboard.</p><div class="kv"><span class="kbd">F5 Copy</span><span class="kbd">F6 Move</span><span class="kbd">⌘K</span></div></div>
-      <div class="card reveal"><span class="pillar-num">02</span><div class="ic"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/></svg></div><h3>AI that respects control</h3><p>Free includes one basic AI tab for natural-language help. Pro adds the command-running AI agent and unlimited AI tabs.</p><div class="kv"><span class="pill"><span class="dot dot--violet"></span>Review → Confirm → Apply</span></div></div>
+      <div class="card reveal"><span class="pillar-num">02</span><div class="ic"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/></svg></div><h3>AI that respects control</h3><p>An AI agent that renames, organizes and cleans up files — with your own key or a local Ollama model. It shows the exact plan and waits for your confirmation. Included in Pro and the 14-day trial.</p><div class="kv"><span class="pill"><span class="dot dot--violet"></span>Review → Confirm → Apply</span></div></div>
       <div class="card reveal"><span class="pillar-num">03</span><div class="ic"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M14 3v5h5M7 3h7l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg></div><h3>Work in context</h3><p>Preview images and PDFs, inspect code, use archive tools, launch terminal, and visualize folder structure without leaving your file manager.</p><div class="kv"><span class="pill">PDF</span><span class="pill">Code</span><span class="pill">ZIP</span><span class="pill">Terminal</span></div></div>
     </div>
   </div>
@@ -242,7 +251,7 @@
       <div class="dev-card"><div class="mini-ic">AI</div><b>Local Ollama</b><p>Use private local AI for file summaries and organization without sending content to cloud models.</p></div>
       <div class="dev-card"><div class="mini-ic">$</div><b>Terminal integration</b><p>Open the active folder in terminal and keep command-line work connected to file context.</p></div>
       <div class="dev-card"><div class="mini-ic">PDF</div><b>Rich previews</b><p>Read PDFs, images, Markdown, code, and archives without constantly changing apps.</p></div>
-      <div class="dev-card"><div class="mini-ic">ZIP</div><b>Archive tools</b><p>Create and inspect compressed files directly from your file workflow.</p></div>
+      <div class="dev-card"><div class="mini-ic">⧉</div><b>Copy without the junk</b><p>Right-click a project → Copy Without: no node_modules, no .env secrets, no build output. Paste anywhere.</p></div>
       <div class="dev-card"><div class="mini-ic">75</div><b>Dev cleanup</b><p>Find rebuildable folders that quietly eat disk space across projects and tools.</p></div>
       <div class="dev-card"><div class="mini-ic">{} </div><b>Code context</b><p>Open code files with syntax-aware viewing for quick inspection and handoff.</p></div>
       <div class="dev-card"><div class="mini-ic">◎</div><b>Folder Graph</b><p>Visualize large project folders when a tree view stops being enough.</p></div>
@@ -316,13 +325,15 @@
           <li>Embedded terminal, archives (zip/extract), and Get Info (⌘I) for multi-select</li>
           <li>Batch image resize, favorites, recent folders, sorting, hidden files, native Share</li>
           <li>Browse your cloud drives — iCloud, Google Drive, Dropbox, OneDrive, Box</li>
+          <li>Copy a project without node_modules, .env and build output — or trash them in place</li>
+          <li>Copy Image to paste pictures straight into chats, and accurate PowerPoint slide previews</li>
         </ul>
         <a class="btn btn--primary btn--lg" href="https://github.com/ayman3000/kommanda-app/releases/latest/download/Kommanda.dmg" target="_blank" rel="noopener">Download Free</a>
       </div>
       <div class="compare-card">
         <span class="price-flag"><span class="dot" style="width:6px;height:6px;border-radius:50%;background:var(--cyan)"></span>Pro</span>
         <h3>Unlock advanced workflows</h3>
-        <p class="compare-price"><span>$29</span> <small>one-time</small></p>
+        <p class="compare-price"><span>$49</span> <small>one-time</small></p>
         <p class="muted">One-time. Bring your own AI key, or run a local Ollama model.</p>
         <ul class="compare-list">
           <li>Reclaim Space — the developer disk cleaner for regenerable caches, node_modules and build artifacts</li>
@@ -350,7 +361,7 @@
 </section>
 
 <section class="section section--tight" id="faq">
-  <div class="wrap"><div class="section-head reveal"><p class="eyebrow">Questions</p><h2>Good to know.</h2></div><div class="faq reveal"><details><summary>Is Kommanda free?<span class="chev"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="faq-a">Yes. The Free version is free forever: dual-pane file management, Reclaim Space, Folder Graph, Get Info, previews, image/archive tools, and one basic AI tab.</p></details><details><summary>What happens after the 14-day Pro access?<span class="chev"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="faq-a">Kommanda keeps working on the Free version. You are never locked out of the app. Upgrade only if you want Pro features.</p></details><details><summary>What AI is free, and what AI is Pro?<span class="chev"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="faq-a">The AI pane opens on the Free version so you can look around, but sending it a message needs Pro or the 14-day trial. Pro adds unlimited AI tabs, the command-running agent, and scheduled prompts. Either way you bring your own key, or run a local Ollama model so nothing leaves your Mac.</p></details><details><summary>Is Reclaim Space free?<span class="chev"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="faq-a">Yes, since 2.20. Reclaim Space finds regenerable developer caches, node_modules, build artifacts and similar cleanup targets, and is part of Pro along with Folder Analysis and the Scheduler. The 14-day trial includes it, so you can see what it finds on your own machine before deciding.</p></details><details><summary>Does the AI modify files automatically?<span class="chev"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="faq-a">No. File-changing actions are previewed and require confirmation. Kommanda drafts the plan; you decide whether to apply it, review each step, or cancel.</p></details></div></div>
+  <div class="wrap"><div class="section-head reveal"><p class="eyebrow">Questions</p><h2>Good to know.</h2></div><div class="faq reveal"><details><summary>Is Kommanda free?<span class="chev"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="faq-a">Yes. The Free version is free forever: dual-pane file management, search, previews (including accurate PowerPoint slides), the embedded terminal, Get Info, image and archive tools, cloud drives, and Copy Without / Remove for project folders.</p></details><details><summary>What happens after the 14-day Pro access?<span class="chev"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="faq-a">Kommanda keeps working on the Free version. You are never locked out of the app. Upgrade only if you want Pro features.</p></details><details><summary>What AI is free, and what AI is Pro?<span class="chev"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="faq-a">The AI pane opens on the Free version so you can look around, but sending it a message needs Pro or the 14-day trial. Pro adds unlimited AI tabs, the command-running agent, and scheduled prompts. Either way you bring your own key, or run a local Ollama model so nothing leaves your Mac.</p></details><details><summary>Is Reclaim Space part of Free or Pro?<span class="chev"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="faq-a">Pro. Reclaim Space finds regenerable developer caches, node_modules, build artifacts and similar cleanup targets across your whole Mac, and is part of Pro along with Folder Analysis and the Scheduler. Cleaning a single project folder (right-click → Remove ▸ node_modules, .env, caches) is free. The 14-day trial includes it, so you can see what it finds on your own machine before deciding.</p></details><details><summary>Does the AI modify files automatically?<span class="chev"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="faq-a">No. File-changing actions are previewed and require confirmation. Kommanda drafts the plan; you decide whether to apply it, review each step, or cancel.</p></details></div></div>
 </section>
 
 <section class="section section--tight engagement" id="community">
